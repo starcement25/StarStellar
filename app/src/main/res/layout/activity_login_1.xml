@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    >
+    <ScrollView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/app_logo_layout"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding_Top_Bottom"
+                android:visibility="invisible"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                >
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_Top_Bottom"
+                    android:visibility="invisible"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical"
+                    >
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/padding_Top_Bottom"
+                        android:visibility="invisible"
+                        />
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="LOGIN"
+                       android:textSize="12sp"
+                       android:paddingLeft="@dimen/padding_Top_Bottom"
+                       />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_Top_Bottom"
+                    android:visibility="invisible"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    >
+                    <EditText
+                        android:id="@+id/et_L_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingStart="14dp"
+                        android:drawableLeft="@drawable/phone"
+                        android:drawablePadding="15dp"
+                        android:gravity="center|left"
+                        android:hint="Enter Phone"
+                        android:background="@drawable/border_grey"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:text=""
+                        android:imeOptions="actionDone"
+                        android:textSize="12sp"
+                        android:textColorHint="@color/colorGray"
+                        android:textColor="@color/colorDarkGray"
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_Top_Bottom"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:paddingStart="14dp"
+                    android:gravity="center"
+                    android:text="LOGIN"
+                    android:background="@drawable/border_red"
+                    android:textColor="@color/green"
+                    android:textSize="12sp"
+
+                    android:clickable="true"
+                    android:onClick="login_1"
+                    android:layout_marginTop="15dp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_Top_Bottom"
+                    android:visibility="invisible"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="@dimen/padding_Top_Bottom"
+                    android:clickable="true"
+                    android:onClick="continueTC"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="By Logging in I Agree to the "
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="12sp"
+                        />
+                    <View
+                        android:layout_width="3dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        />
+                    <TextView
+                        android:id="@+id/tv_TC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="T&amp;C"
+                        android:textColor="@color/colorDarkGray"
+                        android:textSize="12sp"
+                        android:clickable="true"
+                        android:onClick="continueTC"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:visibility="invisible"
+                    />
+                <TextView
+                    android:id="@+id/tv_login_as"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:paddingStart="14dp"
+                    android:gravity="center"
+                    android:text="Signup as New Engineer"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="12sp"
+
+                    android:clickable="true"
+                    android:onClick="signUp"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

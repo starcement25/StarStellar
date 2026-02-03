@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llTopView"
+        android:background="@color/colorHeaderView"
+        >
+        <include
+            android:id="@+id/headeView"
+            layout="@layout/common_header"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/llTopView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/left_right_margin_15dp"
+                >
+                <TextView
+                    android:id="@+id/et_Select_Existing"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    />
+                    <TextView
+                        android:id="@+id/tv_or"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:visibility="gone"
+                        />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_Site_Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Site Name *"
+                        android:singleLine="true"
+                        android:maxLength="99"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_Site_Address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Site Address *"
+                        android:singleLine="true"
+                        android:maxLength="99"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+<!--                    replaced Potential(MT)-->
+                    <EditText
+                        android:id="@+id/et_Site_Potential"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Site MT *"
+                        android:singleLine="true"
+                        android:maxLength="9"
+                        android:inputType="numberDecimal"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_Contact_person"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Contact person Name *"
+                        android:singleLine="true"
+                        android:maxLength="99"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_Cont_Per_Cat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Contact person category *"
+                        android:singleLine="true"
+                        android:maxLength="99"
+                        android:textSize="12sp"
+                        android:drawableRight="@drawable/drop"
+                        android:focusable="false"
+                        android:editable="false"
+                        android:clickable="true"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <EditText
+                        android:id="@+id/et_Mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Mobile Number *"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLength="10"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/et_Expected_Product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Expected Product to be Used *"
+                        android:singleLine="true"
+                        android:maxLength="99"
+                        android:textSize="12sp"
+                        android:drawableRight="@drawable/drop"
+                        android:focusable="false"
+                        android:editable="false"
+                        android:clickable="true"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <EditText
+                        android:id="@+id/et_Consumption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:hint="Expected Consumption (No. of bags) *"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLength="19"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorBlack"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Site Photo"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/left_right_margin_15dp"
+                    android:layout_marginTop="@dimen/left_right_margin_15dp"
+                    android:textSize="12sp"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    >
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_Star_Logo_B"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/profile_bg"
+                        android:layout_centerInParent="true"
+                        android:onClick="chooseYourImage"
+                        />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_new_site"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/cam"
+                        android:layout_centerInParent="true"
+                        />
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SUBMIT"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="@dimen/left_right_margin_15dp"
+                    android:layout_margin="25dp"
+
+                    android:background="@drawable/border_red"
+                    android:textColor="@color/green"
+                    android:clickable="true"
+                    android:onClick="add_new_site"
+                    />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</RelativeLayout>

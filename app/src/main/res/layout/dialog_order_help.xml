@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    >
+    <TextView
+        android:id="@+id/tv_a_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUPPORT"
+        android:textColor="@color/colorDarkGray_gb"
+        android:padding="@dimen/left_right_margin_15dp"
+        android:textSize="12sp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        />
+    <RadioGroup
+        android:id="@+id/rg_gift_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="11dp"
+        android:checkedButton="@id/rb_0"
+        >
+        <RadioButton
+            android:id="@+id/rb_0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Not Delivered"
+            android:textSize="12sp"
+            />
+        <RadioButton
+            android:id="@+id/rb_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Defective Product"
+            android:textSize="12sp"
+            />
+        <RadioButton
+            android:id="@+id/rb_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"
+            android:textSize="12sp"
+            />
+    </RadioGroup>
+    <EditText
+        android:id="@+id/et_gift_comments"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/border_gray_solid"
+        android:layout_margin="@dimen/left_right_margin_15dp"
+        android:hint="Write details"
+        android:gravity="top"
+        android:padding="@dimen/padding_Top_Bottom"
+        android:inputType="textMultiLine"
+        android:maxLines="9"
+        />
+    <TextView
+        android:id="@+id/tv_gift_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/left_right_margin_15dp"
+        android:layout_margin="@dimen/left_right_margin_15dp"
+        android:background="@drawable/border_red_solid"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="SUBMIT"
+        android:clickable="true"
+        />
+</LinearLayout>

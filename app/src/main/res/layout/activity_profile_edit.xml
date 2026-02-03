@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llTopView"
+        android:background="@color/colorHeaderView"
+        >
+        <include
+            android:id="@+id/headeView"
+            layout="@layout/common_header"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@+id/llTopView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorGray"
+            android:id="@+id/rl_Star_Logo_P"
+            android:gravity="center"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_Star_Logo_B"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/profile_bg"
+                android:layout_centerInParent="true"
+                android:onClick="chooseYourImage_P"
+                />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_Star_Logo_F"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profile_icon"
+                android:layout_centerInParent="true"
+                />
+            <ImageView
+                android:id="@+id/iv_Star_Logo_Cam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cam"
+                android:layout_centerInParent="true"
+                app:tint="@color/red"
+                android:adjustViewBounds="true"
+                />
+
+        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/left_right_margin_15dp"
+                    >
+                    <!--android:theme="@style/myTextInputLayout"-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_P_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="Name *"
+                            android:singleLine="true"
+                            android:maxLength="99"
+                            android:textSize="12sp"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <EditText
+                            android:id="@+id/et_P_birthday"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="Date of Birth"
+                            android:singleLine="true"
+                            android:maxLength="10"
+                            android:textSize="12sp"
+                            android:enabled="false"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_P_anniversary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="Date of Marriage"
+                            android:singleLine="true"
+                            android:maxLength="10"
+                            android:textSize="12sp"
+                            android:enabled="false"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_P_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="Address *"
+                            android:gravity="top|left"
+                            android:maxLength="500"
+                            android:maxLines="16"
+                            android:textSize="12sp"
+                            android:inputType="textMultiLine"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_P_pincode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="Pincode *"
+                            android:gravity="top|left"
+                            android:maxLength="6"
+                            android:maxLines="1"
+                            android:textSize="12sp"
+                            android:inputType="number"
+                            android:imeOptions="actionNext"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_P_state"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="State *"
+                            android:singleLine="true"
+                            android:inputType="text"
+                            android:imeOptions="actionNext"
+                            android:maxLength="99"
+                            android:textSize="12sp"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/et_P_city_town"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:hint="City/Town *"
+                            android:singleLine="true"
+                            android:inputType="text"
+                            android:imeOptions="actionDone"
+                            android:maxLength="99"
+                            android:textSize="12sp"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UPDATE"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:layout_margin="25dp"
+
+                        android:background="@drawable/border_red"
+                        android:textColor="@color/green"
+                        android:clickable="true"
+                        android:onClick="update_profile"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</RelativeLayout>

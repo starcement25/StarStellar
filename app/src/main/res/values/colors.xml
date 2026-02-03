@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#BB1508</color>
+    <color name="colorPrimaryDark">#BB1508</color>
+    <color name="colorAccent">@color/green</color>
+
+    <color name="custom_background_disabled">#F0F8DB</color>
+    <color name="custom_text_selected">#FFFFFFFF</color>
+    <color name="custom_text_inactive">#7f778088</color>
+    <color name="transparent">#00000000</color>
+<!--    <color name="custom_header_text">#85B100</color>-->
+    <color name="color_green">#1c6e00</color>
+    <color name="colorStatusBar">@color/statusBarColor</color>
+    <color name="colorHeaderView">@color/green</color>
+
+    <color name="colorDarkGreen">@color/green</color>
+    <color name="colorLightGreen">@color/green</color>
+    <color name="colorDarkRed">@color/red</color>
+    <color name="colorWhite">@color/white</color>
+    <color name="colorBlack">@android:color/black</color>
+    <color name="colorDarkGray_gb">#333333</color>
+    <color name="colorDarkGray">#999999</color>
+    <color name="colorLightGray">#edeaea</color>
+    <color name="colorGray">#d3d3d3</color>
+    <color name="colorLightTranparent">#60000000</color>
+    <color name="colorDeliveringBackground">@color/green</color>
+    <color name="red">@color/green</color>
+    <color name="green">#ed1c24</color>
+    <color name="white">#FFFFFF</color>
+    <color name="new_Gray">#f5f0ed</color>
+    <color name="statusBarColor">#bb1508</color><!-- Status Bar Color -->
+</resources>

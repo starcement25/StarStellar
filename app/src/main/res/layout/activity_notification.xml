@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llTopView"
+        android:background="@color/colorHeaderView"
+        >
+        <include
+            android:id="@+id/headeView"
+            layout="@layout/common_header"
+            />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/lv_Ledger"
+        android:layout_below="@id/llTopView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight=".75dp"
+        android:divider="@null"
+        android:layout_marginLeft="@dimen/left_right_margin_3dp"
+        android:layout_marginRight="@dimen/left_right_margin_3dp"
+        />
+    <TextView
+        android:id="@+id/tv_no_record"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No record found."
+        android:gravity="center"
+        android:textColor="@color/colorDarkGray"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        />
+</RelativeLayout>

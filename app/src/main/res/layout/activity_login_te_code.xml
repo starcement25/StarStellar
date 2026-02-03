@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite"
+    >
+    <ScrollView
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <include layout="@layout/app_logo_layout"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/left_right_margin_15dp"
+                android:visibility="invisible"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    >
+                    <EditText
+                        android:id="@+id/et_te_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingStart="14dp"
+                        android:drawableLeft="@drawable/id"
+                        android:drawablePadding="15dp"
+                        android:gravity="center|left"
+                        android:hint="Enter TE Code"
+                        android:background="@drawable/border_grey"
+                        android:singleLine="true"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="99"
+                        android:text=""
+                        android:imeOptions="actionDone"
+                        android:textSize="12sp"
+                        android:textColorHint="@color/colorGray"
+                        android:textColor="@color/colorDarkGray"
+                        />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_Top_Bottom"
+                    android:visibility="invisible"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    android:visibility="invisible"
+                    >
+                    <EditText
+                        android:id="@+id/et_te_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:paddingStart="14dp"
+                        android:drawableLeft="@drawable/phone"
+                        android:drawablePadding="15dp"
+                        android:gravity="center|left"
+                        android:hint="Enter Phone"
+                        android:background="@drawable/border_grey"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:text=""
+                        android:textSize="12sp"
+                        android:imeOptions="actionDone"
+                        android:textColor="@color/colorDarkGray"
+                        android:textColorHint="@color/colorGray"
+                        />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/padding_Top_Bottom"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:paddingStart="14dp"
+                    android:gravity="center"
+                    android:text="ENTER"
+                    android:background="@drawable/border_red"
+                    android:textColor="@color/green"
+                    android:textSize="12sp"
+
+                    android:clickable="true"
+                    android:onClick="login_step_2"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:visibility="invisible"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

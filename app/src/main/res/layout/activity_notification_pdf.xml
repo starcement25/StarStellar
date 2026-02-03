@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F0F1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llTopView"
+        android:background="@color/colorHeaderView"
+        >
+        <include
+            android:id="@+id/headeView"
+            layout="@layout/common_header"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/llTopView"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+            <TextView
+                android:textColor="@color/colorDarkGray_gb"
+                android:id="@+id/vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:gravity="left|center_vertical"
+                android:text=""/>
+            <TextView
+                android:textColor="@color/colorDarkGray_gb"
+                android:id="@+id/pdfPageNumberTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:text=""/>
+
+        </LinearLayout>
+        <forcepower.com.star_stellar.Class.TouchImageView
+            android:id="@+id/imgPdfRendered"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/default_"
+            >
+
+        </forcepower.com.star_stellar.Class.TouchImageView>
+    </LinearLayout>
+</RelativeLayout>

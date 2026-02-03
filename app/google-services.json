@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "90990435055",
+    "firebase_url": "https://star-stellar-forcepower.firebaseio.com",
+    "project_id": "star-stellar-forcepower",
+    "storage_bucket": "star-stellar-forcepower.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90990435055:android:78e6d98e096dc0f4",
+        "android_client_info": {
+          "package_name": "forcepower.com.star_stellar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90990435055-t93g4bifmbjk7ok298k91kbd4585rjd5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "forcepower.com.star_stellar",
+            "certificate_hash": "faf194a2705460759d243f3f735e72ac29b6610c"
+          }
+        },
+        {
+          "client_id": "90990435055-ho4alkfvsk4p2fisbp8ev14n8qnemltq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "forcepower.com.star_stellar",
+            "certificate_hash": "243a84cf9f62441f9f70a60145198d20fdf33433"
+          }
+        },
+        {
+          "client_id": "90990435055-kup82nofc2a8f1aep64hat59bbhh1iln.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "forcepower.com.star_stellar",
+            "certificate_hash": "37c8d976bc3d6bd2a64776582426591243e3f715"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4cyifckDss6YOiM_8fZXK6ezewXyxS00"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

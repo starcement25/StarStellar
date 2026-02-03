@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/green"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/green"
+        android:id="@+id/rlHeaderView"
+        >
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/back_"
+            android:padding="15dp"
+            android:scaleType="center"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/tvCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toEndOf="@+id/ivBack"
+            android:layout_toStartOf="@+id/rlForward"
+            android:text="@string/app_name"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rlForward"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:visibility="visible"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/iv_home_refresh"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/search"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:onClick="open_eng_search"
+                android:tag="search"
+                android:padding="@dimen/padding_Top_Bottom"
+                />
+            <ImageView
+                android:layout_toRightOf="@id/iv_home_refresh"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/filter"
+                android:clickable="true"
+                android:onClick="open_eng_filter"
+                android:tag="filter"
+                android:padding="@dimen/padding_Top_Bottom"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

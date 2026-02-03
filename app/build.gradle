@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+// Add the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    signingConfigs {
+        def path =  "${project.rootDir}/KEY_STORE/star_stellar.jks"
+        println  " amitabha2715_i_1 $path"
+        def  f_path = path.replaceAll("\\\\", "/")
+        println  " amitabha2715_i_2 $f_path"
+
+        debug {
+            storeFile file(f_path)
+            storePassword 'android'
+            keyAlias = 'android'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file(f_path)
+            storePassword 'android'
+            keyAlias = 'android'
+            keyPassword 'android'
+        }
+    }
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "forcepower.com.star_stellar"
+        minSdk 26
+        targetSdk 34
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        resourceConfigurations += ['en']
+        buildToolsVersion = "35.0.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+//            runProguard true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            flavorDimensions = ["one"]
+            productFlavors {
+                star_stellar_ {
+                    dimension = "one"
+                    buildConfigField  ("String", "API_URL", '"https://www.starstellar.com/"')
+                }
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    namespace 'forcepower.com.star_stellar'
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def version = variant.versionName
+            def date = new Date()
+            def formattedDate = date.format('MMM_dd_yyyy')
+            def newApkName =  "Star_Stellar_" + version + "_" + formattedDate + "_.apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.6.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    implementation 'com.loopj.android:android-async-http:1.4.11'
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-messaging:24.1.0'
+
+    implementation 'com.google.android.gms:play-services-auth:21.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "com.squareup.okhttp3:okhttp:4.9.0"
+    implementation project(':my_crop')
+}
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'org.jetbrains.kotlin.android'

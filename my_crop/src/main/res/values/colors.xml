@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="headerColor">#ed1c24</color>
+    <color name="statusBarColor">#bb1508</color><!-- Status Bar Color -->
+</resources>
