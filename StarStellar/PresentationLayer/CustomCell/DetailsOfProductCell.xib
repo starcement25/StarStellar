@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailsOfProductCell" rowHeight="256" id="KGk-i7-Jjw" customClass="DetailsOfProductCell" customModule="StarStellar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select product*" textAlignment="natural" minimumFontSize="17" background="tf_underline" translatesAutoresizingMaskIntoConstraints="NO" id="ISz-b5-4Vo" customClass="FPTextField" customModule="StarStellar" customModuleProvider="target">
+                        <rect key="frame" x="10" y="10" width="300" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="xPl-hh-ToR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="drop"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="rightPadding">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Expected consumption*" textAlignment="natural" minimumFontSize="17" background="tf_underline" translatesAutoresizingMaskIntoConstraints="NO" id="zhE-dl-FXe" customClass="FPTextField" customModule="StarStellar" customModuleProvider="target">
+                        <rect key="frame" x="10" y="48" width="300" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="xpC-Fw-fSO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From where the bags have been purchased" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lta-Id-ViD">
+                        <rect key="frame" x="10" y="86" width="300" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oel-6M-uds">
+                        <rect key="frame" x="10" y="111" width="80" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="bRg-xg-h5I"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Dealer" image="radio_off">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" image="radio_on"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSU-nH-nnc">
+                        <rect key="frame" x="98" y="111" width="100" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="6lK-k2-BcA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <inset key="titleEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <state key="normal" title="Subdealer" image="radio_off">
+                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" image="radio_on"/>
+                    </button>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name*" textAlignment="natural" minimumFontSize="17" background="tf_underline" translatesAutoresizingMaskIntoConstraints="NO" id="Hvw-Ud-3WM" customClass="FPTextField" customModule="StarStellar" customModuleProvider="target">
+                        <rect key="frame" x="10" y="139.5" width="300" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="F4J-4P-sSZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Area*" textAlignment="natural" minimumFontSize="17" background="tf_underline" translatesAutoresizingMaskIntoConstraints="NO" id="3nR-3I-tVP" customClass="FPTextField" customModule="StarStellar" customModuleProvider="target">
+                        <rect key="frame" x="10" y="177.5" width="300" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="s0g-yo-olQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                    </textField>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contact number*" textAlignment="natural" minimumFontSize="17" background="tf_underline" translatesAutoresizingMaskIntoConstraints="NO" id="MkZ-3t-v1R" customClass="FPTextField" customModule="StarStellar" customModuleProvider="target">
+                        <rect key="frame" x="10" y="215.5" width="300" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="M6d-uM-L1S"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="maxLength">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ISz-b5-4Vo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="00B-Ul-50E"/>
+                    <constraint firstItem="Hvw-Ud-3WM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0uf-Xn-S8g"/>
+                    <constraint firstItem="Lta-Id-ViD" firstAttribute="top" secondItem="zhE-dl-FXe" secondAttribute="bottom" constant="8" id="19o-i9-ZJu"/>
+                    <constraint firstItem="3nR-3I-tVP" firstAttribute="top" secondItem="Hvw-Ud-3WM" secondAttribute="bottom" constant="8" id="34H-dJ-cqN"/>
+                    <constraint firstItem="Lta-Id-ViD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="4Ta-bM-wB3"/>
+                    <constraint firstItem="3nR-3I-tVP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Ew0-br-uyW"/>
+                    <constraint firstAttribute="trailing" secondItem="MkZ-3t-v1R" secondAttribute="trailing" constant="10" id="G9c-Gh-7aD"/>
+                    <constraint firstItem="dSU-nH-nnc" firstAttribute="top" secondItem="Lta-Id-ViD" secondAttribute="bottom" constant="8" id="KfW-tT-czi"/>
+                    <constraint firstItem="MkZ-3t-v1R" firstAttribute="top" secondItem="3nR-3I-tVP" secondAttribute="bottom" constant="8" id="KsD-IS-1qS"/>
+                    <constraint firstAttribute="trailing" secondItem="zhE-dl-FXe" secondAttribute="trailing" constant="10" id="Q1w-1U-Mom"/>
+                    <constraint firstAttribute="trailing" secondItem="Hvw-Ud-3WM" secondAttribute="trailing" constant="10" id="STx-sT-AxY"/>
+                    <constraint firstItem="ISz-b5-4Vo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TxX-Wy-5FZ"/>
+                    <constraint firstAttribute="trailing" secondItem="ISz-b5-4Vo" secondAttribute="trailing" constant="10" id="Uay-vX-1ZH"/>
+                    <constraint firstItem="oel-6M-uds" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="a0p-jp-ZTU"/>
+                    <constraint firstItem="dSU-nH-nnc" firstAttribute="leading" secondItem="oel-6M-uds" secondAttribute="trailing" constant="8" id="aoA-Bs-DpJ"/>
+                    <constraint firstItem="oel-6M-uds" firstAttribute="top" secondItem="Lta-Id-ViD" secondAttribute="bottom" constant="8" id="foE-MK-9rm"/>
+                    <constraint firstItem="zhE-dl-FXe" firstAttribute="top" secondItem="ISz-b5-4Vo" secondAttribute="bottom" constant="8" id="gQj-I2-PSp"/>
+                    <constraint firstAttribute="trailing" secondItem="Lta-Id-ViD" secondAttribute="trailing" constant="10" id="kS1-yN-ZnT"/>
+                    <constraint firstAttribute="trailing" secondItem="3nR-3I-tVP" secondAttribute="trailing" constant="10" id="r0J-Kt-E1D"/>
+                    <constraint firstAttribute="bottom" secondItem="MkZ-3t-v1R" secondAttribute="bottom" constant="10.5" id="rM4-le-tJb"/>
+                    <constraint firstItem="MkZ-3t-v1R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="uDt-i5-MxW"/>
+                    <constraint firstItem="zhE-dl-FXe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="vGn-Kq-izs"/>
+                    <constraint firstItem="Hvw-Ud-3WM" firstAttribute="top" secondItem="oel-6M-uds" secondAttribute="bottom" constant="8" id="zw7-b7-TdP"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="btnDealer" destination="oel-6M-uds" id="YaH-KI-UHD"/>
+                <outlet property="btnSubdealer" destination="dSU-nH-nnc" id="e9X-lV-BVu"/>
+                <outlet property="txtFieldArea" destination="3nR-3I-tVP" id="NO5-pD-HUV"/>
+                <outlet property="txtFieldContactNumber" destination="MkZ-3t-v1R" id="tU6-vo-K9m"/>
+                <outlet property="txtFieldExpectedConsumption" destination="zhE-dl-FXe" id="mls-px-fm3"/>
+                <outlet property="txtFieldName" destination="Hvw-Ud-3WM" id="z1c-N4-IHp"/>
+                <outlet property="txtFieldSelectProduct" destination="ISz-b5-4Vo" id="Llj-fg-th9"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="188.83928571428569"/>
+        </tableViewCell>
+    </objects>
+    <designables>
+        <designable name="3nR-3I-tVP">
+            <size key="intrinsicContentSize" width="36.5" height="18.5"/>
+        </designable>
+        <designable name="Hvw-Ud-3WM">
+            <size key="intrinsicContentSize" width="44.5" height="18.5"/>
+        </designable>
+        <designable name="ISz-b5-4Vo">
+            <size key="intrinsicContentSize" width="126" height="18.5"/>
+        </designable>
+        <designable name="MkZ-3t-v1R">
+            <size key="intrinsicContentSize" width="111.5" height="18.5"/>
+        </designable>
+        <designable name="zhE-dl-FXe">
+            <size key="intrinsicContentSize" width="155" height="18.5"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="drop" width="24" height="24"/>
+        <image name="radio_off" width="20" height="20"/>
+        <image name="radio_on" width="20" height="20"/>
+        <image name="tf_underline" width="300" height="30"/>
+    </resources>
+</document>

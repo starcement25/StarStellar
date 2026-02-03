@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="gTV-IL-0wX" customClass="TopPicksCell" customModule="StarStellar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="120" height="170"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rNu-di-QKu">
+                        <rect key="frame" x="5" y="5" width="110" height="140.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JFV-Dm-Tib">
+                        <rect key="frame" x="5" y="150.5" width="110" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="JFV-Dm-Tib" secondAttribute="bottom" constant="5" id="1hV-8P-WPE"/>
+                <constraint firstItem="JFV-Dm-Tib" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="Ev1-hL-nwM"/>
+                <constraint firstAttribute="trailing" secondItem="JFV-Dm-Tib" secondAttribute="trailing" constant="5" id="UTQ-7x-zgC"/>
+                <constraint firstItem="JFV-Dm-Tib" firstAttribute="top" secondItem="rNu-di-QKu" secondAttribute="bottom" constant="5" id="Wn2-HU-OJ6"/>
+                <constraint firstItem="rNu-di-QKu" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="iTJ-Ae-z8C"/>
+                <constraint firstAttribute="trailing" secondItem="rNu-di-QKu" secondAttribute="trailing" constant="5" id="nv1-d0-ql0"/>
+                <constraint firstItem="rNu-di-QKu" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="yph-tl-VtH"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="50" height="106"/>
+            <connections>
+                <outlet property="imgViewTopPicks" destination="rNu-di-QKu" id="gM5-Ur-PZ2"/>
+                <outlet property="lblTopPicks" destination="JFV-Dm-Tib" id="A7i-yO-liV"/>
+            </connections>
+            <point key="canvasLocation" x="132.80000000000001" y="172.71364317841082"/>
+        </collectionViewCell>
+    </objects>
+</document>
