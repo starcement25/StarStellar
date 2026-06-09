@@ -269,6 +269,7 @@ public class OtpActivity extends BaseActivity implements TextWatcher, View.OnKey
         params.put("registration_id", get_firebase_token(myActivity));
         params.put("device_type", "ANDROID");
         params.put("app_version", BuildConfig.VERSION_NAME);
+        params.put("firebase_token", get_firebase_token(myActivity));
 
 //mobile,user_type,otp,device_id,registration_id,device_type
 //device_type = ANDROID/IOS

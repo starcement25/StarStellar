@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="MyUcropTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Optional: Status bar color -->
+        <item name="android:statusBarColor">#000000</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Force the layout to respect system windows -->
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+
+    <style name="ExpandedTitleStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <!-- Collapsing toolbar — small collapsed title in the pinned toolbar -->
+    <style name="CollapsedTitleStyle" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+</resources>

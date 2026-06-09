@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ic_category_sparkle.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Big star / sparkle -->
+    <path
+        android:fillColor="#2D2D2D"
+        android:pathData="M12,2C12,2 13.5,8 18,8C13.5,8 12,14 12,14C12,14 10.5,8 6,8C10.5,8 12,2 12,2Z" />
+    <!-- Small sparkle top-right -->
+    <path
+        android:fillColor="#2D2D2D"
+        android:pathData="M19,14C19,14 19.75,17 22,17C19.75,17 19,20 19,20C19,20 18.25,17 16,17C18.25,17 19,14 19,14Z" />
+    <!-- Small sparkle bottom-left -->
+    <path
+        android:fillColor="#2D2D2D"
+        android:pathData="M5,16C5,16 5.6,18.4 7.4,18.4C5.6,18.4 5,20.8 5,20.8C5,20.8 4.4,18.4 2.6,18.4C4.4,18.4 5,16 5,16Z" />
+</vector>

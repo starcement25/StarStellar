@@ -170,7 +170,7 @@ public class EngineerPlaceOrderActivity extends BaseActivity {
 
     public void expectedProd_Dialog(final View v) {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Expected Product to be Used");

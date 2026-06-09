@@ -1,86 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true">
+
     <LinearLayout
+        android:id="@+id/llTopView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llTopView"
-        android:background="@color/colorHeaderView"
-        >
+        android:background="@color/colorHeaderView">
+
         <include
             android:id="@+id/headeView"
-            layout="@layout/common_header_engineer"
-            />
+            layout="@layout/common_header_engineer" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_my_eng_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@id/llTopView"
-        android:visibility="gone"
-        >
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <EditText
             android:id="@+id/et_Search_Eng"
             android:layout_width="0dp"
-            android:layout_weight="6"
             android:layout_height="wrap_content"
-            android:padding="@dimen/left_right_margin_15dp"
-            android:maxLines="1"
+            android:layout_gravity="center"
+            android:layout_weight="6"
+            android:background="@null"
+            android:hint="Type engineer name"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLength="99"
-            android:hint="Type engineer name"
-            android:visibility="visible"
-            android:imeOptions="actionSearch"
-            android:layout_gravity="center"
-            android:background="@null"
-            />
+            android:maxLines="1"
+            android:padding="@dimen/left_right_margin_15dp"
+            android:textColor="@color/colorBlack"
+            android:visibility="visible" />
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@drawable/t_cross"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:clickable="true"
             android:onClick="my_eng_reset"
-            />
+            android:src="@drawable/t_cross" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/tv_line"
-        android:layout_below="@id/ll_my_eng_search"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/ll_my_eng_search"
         android:background="@color/red"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_MyEngineer"
-
-        android:layout_below="@id/tv_line"
-        android:layout_above="@+id/tv_pending_engineer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="0dp"
-        android:divider="@color/colorWhite"
+        android:layout_above="@+id/tv_pending_engineer"
+        android:layout_below="@id/tv_line"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
-        />
+        android:divider="@color/colorWhite"
+        android:dividerHeight="0dp" />
+
     <TextView
         android:id="@+id/tv_pending_engineer"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/left_right_margin_15dp"
+        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/padding_Top_Bottom"
         android:background="@drawable/border_red_solid"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:text="0 ENGINEERS TO BE APPROVED"
         android:clickable="true"
+        android:gravity="center"
         android:onClick="pendingEngineer"
-        android:visibility="gone"
-        />
+        android:padding="@dimen/left_right_margin_15dp"
+        android:text="0 ENGINEERS TO BE APPROVED"
+        android:textColor="@color/white"
+        android:visibility="gone" />
 </RelativeLayout>

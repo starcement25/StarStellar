@@ -1,192 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
     <LinearLayout
+        android:id="@+id/llTopView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llTopView"
-        android:background="@color/colorHeaderView"
-        >
+        android:background="@color/colorHeaderView">
+
         <include
             android:id="@+id/headeView"
-            layout="@layout/common_header"
-            />
+            layout="@layout/common_header" />
     </LinearLayout>
+
     <RelativeLayout
-        android:layout_below="@+id/llTopView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_below="@+id/llTopView"
+        android:orientation="vertical" >
 
-        >
         <RelativeLayout
+            android:id="@+id/rl_Star_Logo_P"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorGray"
-            android:id="@+id/rl_Star_Logo_P"
-            android:gravity="center"
-            >
+            android:background="@color/white"
+            android:gravity="center">
+
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/rl_profile"
-                >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_Star_Logo_B"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:src="@drawable/profile_bg"
                     android:layout_centerInParent="true"
-                    />
+                    android:src="@drawable/profile_bg" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/iv_Star_Logo_F"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/profile_icon"
                     android:layout_centerInParent="true"
-                    />
+                    android:src="@drawable/profile_icon" />
             </RelativeLayout>
+
             <TextView
                 android:id="@+id/tv_profiler"
-                android:layout_below="@+id/rl_profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:layout_below="@+id/rl_profile"
                 android:layout_centerInParent="true"
-                android:padding="9dp"
-                android:textColor="@color/colorDarkGray_gb"
-                android:textSize="12sp"
-                android:lines="1"
                 android:ellipsize="end"
-                />
+                android:lines="1"
+                android:padding="9dp"
+                android:text=""
+                android:textColor="@color/colorDarkGray_gb"
+                android:textSize="12sp" />
 
         </RelativeLayout>
+
         <LinearLayout
             android:id="@+id/ll_profile_points"
-            android:layout_below="@+id/rl_Star_Logo_P"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/left_right_margin_3dp"
-            >
+            android:layout_below="@+id/rl_Star_Logo_P"
+            android:layout_marginHorizontal="@dimen/left_right_margin_3dp"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/colorGray"
                 android:layout_margin="@dimen/left_right_margin_3dp"
+                android:layout_weight="1"
+                android:background="@color/colorLightGray"
                 android:clickable="true"
                 android:onClick="ll_sites_recommended"
-                >
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_number_of_sites"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:padding="@dimen/left_right_margin_3dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorDarkGray_gb"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textStyle="bold"
-                    />
+                    android:padding="@dimen/left_right_margin_3dp"
+                    android:text="0"
+                    android:textColor="@color/colorDarkGray_gb"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Sites Recommended"
-                    android:padding="@dimen/left_right_margin_3dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorDarkGray_gb"
+                    android:layout_height="40dp"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:lines="2"
-                    android:ellipsize="end"
-                    />
+                    android:padding="@dimen/left_right_margin_3dp"
+                    android:text="Sites Recommended"
+                    android:textColor="@color/colorDarkGray_gb"
+                    android:textSize="12sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/colorGray"
                 android:layout_margin="@dimen/left_right_margin_3dp"
+                android:layout_weight="1"
+                android:background="@color/colorLightGray"
                 android:clickable="true"
                 android:onClick="ll_sites_points"
-                >
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_number_of_points"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:padding="@dimen/left_right_margin_3dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorDarkGray_gb"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textStyle="bold"
-                    />
+                    android:padding="@dimen/left_right_margin_3dp"
+                    android:text="0"
+                    android:textColor="@color/colorDarkGray_gb"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Stellar Points"
-                    android:padding="@dimen/left_right_margin_3dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorDarkGray_gb"
+                    android:layout_height="40dp"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:lines="2"
-                    android:ellipsize="end"
-                    />
+                    android:padding="@dimen/left_right_margin_3dp"
+                    android:text="Stellar Points"
+                    android:textColor="@color/colorDarkGray_gb"
+                    android:textSize="12sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:background="@color/colorGray"
                 android:layout_margin="@dimen/left_right_margin_3dp"
+                android:layout_weight="1"
+                android:background="@color/colorLightGray"
                 android:clickable="true"
                 android:onClick="ll_gift_redeem"
-                >
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/tv_number_of_gifts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="0"
-                    android:padding="@dimen/left_right_margin_3dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorDarkGray_gb"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:maxLines="1"
-                    android:ellipsize="end"
-                    android:textStyle="bold"
-                    />
+                    android:padding="@dimen/left_right_margin_3dp"
+                    android:text="0"
+                    android:textColor="@color/colorDarkGray_gb"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="Gifts Redeemed"
-                    android:padding="@dimen/left_right_margin_3dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/colorDarkGray_gb"
+                    android:layout_height="40dp"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:lines="2"
-                    android:ellipsize="end"
-                    />
+                    android:padding="@dimen/left_right_margin_3dp"
+                    android:text="Gifts Redeemed"
+                    android:textColor="@color/colorDarkGray_gb"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
+
         <ListView
             android:id="@+id/lv_Profile"
-            android:layout_below="@+id/ll_profile_points"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_profile_points"
             android:layout_marginBottom="@dimen/left_right_margin_15dp"
-            android:divider="@null"
-            />
+            android:divider="@null" />
 
     </RelativeLayout>
 </RelativeLayout>

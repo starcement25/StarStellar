@@ -67,6 +67,7 @@ import java.util.ArrayList;
 import cz.msebera.android.httpclient.Header;
 import forcepower.com.star_stellar.Activity.Engineer.Adapter.MySiteDetailsAdapter;
 import forcepower.com.star_stellar.Activity.Engineer.Adapter.ProductListAdapter;
+import forcepower.com.star_stellar.Activity.Engineer.ExistingSiteModel;
 import forcepower.com.star_stellar.Class.BaseActivity;
 import forcepower.com.star_stellar.Class.CommonHelper;
 import forcepower.com.star_stellar.Class.MarshMallowPermission;
@@ -75,7 +76,8 @@ import my_crop.vola.ImagePickerActivity;
 
 public class TeRecommendationDetails_UL extends BaseActivity {
     private Activity myActivity;
-    private String json_row = "", r_site_id = "", expected_product_id = "";
+    private String  r_site_id = "", expected_product_id = "";
+    private ExistingSiteModel json_row ;
     private ListView lv_recom_details, lv_te_eng_ul;
     private ArrayList<CommonHelper> menu_item_list = new ArrayList<>();
     private ArrayList<CommonHelper> eng_details_list = new ArrayList<>();
@@ -111,9 +113,9 @@ public class TeRecommendationDetails_UL extends BaseActivity {
                 }
             });
 
-            json_row = getIntent().getStringExtra("recommended_site_details");
+            json_row = (ExistingSiteModel) getIntent().getSerializableExtra("recommended_site_details");
 
-            final JSONObject e = new JSONObject(json_row);
+            final JSONObject e = new JSONObject(json_row.get_json_row());
             String r_recomended_site_image_url = e.getString("r_recomended_site_image_url");
             print_Log_d("r_recomended_site_image_url", r_recomended_site_image_url);
             ImageView iv_mySite_ = (ImageView) findViewById(R.id.iv_mySite_);
@@ -131,8 +133,8 @@ public class TeRecommendationDetails_UL extends BaseActivity {
                     .error(R.drawable.default_)
                     .into(iv_mySite_);
 
-            parse_eng_details(json_row);
-            parse_mySite(json_row);
+            parse_eng_details(json_row.get_json_row());
+            parse_mySite(json_row.get_json_row());
             et_site_comments = (EditText) findViewById(R.id.et_site_comments);
             et_Select_product = (EditText) findViewById(R.id.et_Select_product);
             et_Consumption = (EditText) findViewById(R.id.et_Consumption);
@@ -158,7 +160,7 @@ public class TeRecommendationDetails_UL extends BaseActivity {
 
     public void expectedProd_Dialog() {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Expected Product to be Used");
@@ -475,7 +477,7 @@ public class TeRecommendationDetails_UL extends BaseActivity {
 
     public void mail_Dialog(final String msg, final String approval_btn_text, final String the_recommended_id) {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             // Get the layout inflater
             LayoutInflater inflater = myActivity.getLayoutInflater();

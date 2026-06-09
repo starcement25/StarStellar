@@ -1,6 +1,8 @@
 package forcepower.com.star_stellar.Activity.Engineer;
 
-public class ExistingSiteModel {
+import java.io.Serializable;
+
+public class ExistingSiteModel implements Serializable {
     private String r_site_id, r_site_name, r_contact_person_name,
             r_mobile_no, r_address, r_site_potential_in_mt,
             r_contact_person_category_name, r_recomended_site_image_url,

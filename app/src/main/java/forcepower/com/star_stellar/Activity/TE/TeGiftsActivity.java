@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -56,6 +60,8 @@ public class TeGiftsActivity extends BaseActivity {
     TeGiftRvAdapter giftRvAdapter;
     RecyclerView rv_Pending;
     int page_no_P = 1, tot_count_P = 0, p_array_size = 0;
+    FrameLayout llPopup;
+    String categoryId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +87,7 @@ public class TeGiftsActivity extends BaseActivity {
                     onBackPressed();
                 }
             });
+            categoryId = getIntent().getStringExtra("category_id");
 
 //            RelativeLayout rlForward = (RelativeLayout) findViewById(R.id.rlForward);
 //            rlForward.setPadding(0, 0, 25, 0);
@@ -97,12 +104,15 @@ public class TeGiftsActivity extends BaseActivity {
             rv_Pending.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
             giftRvAdapter = new TeGiftRvAdapter(pending_list, myActivity);
             rv_Pending.setAdapter(giftRvAdapter);
+            llPopup = findViewById(R.id.popup_root);
             initScroll_p();
             if (isInternetConnected(myActivity)) {
                 get_gift_details("fresh_g");
             } else {
                 Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
             }
+            llPopup.setVisibility(View.GONE);
+
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -115,6 +125,7 @@ public class TeGiftsActivity extends BaseActivity {
         final RequestParams params = new RequestParams();
 //        params.put("te_code", get_TE_code(myActivity));
         params.put("page_no", page_no_P + "");
+        params.put("category_id", categoryId + "");
 
         final AsyncHttpClient client = new AsyncHttpClient();
         client.setTimeout(DEFAULT_TIMEOUT);
@@ -125,6 +136,8 @@ public class TeGiftsActivity extends BaseActivity {
                 try {
                     final JSONObject reader = new JSONObject(str);
                     print_Log_d("gift_ ", str + "");
+                    print_Log_d("gift_ ", categoryId + "");
+                    print_Log_d("gift_ ", ws_show_gift_catalog_for_te + "");
 
                     if (reader.optString("process_status").equalsIgnoreCase("YES")) {
                         if (page_no_P == 1) {
@@ -150,7 +163,8 @@ public class TeGiftsActivity extends BaseActivity {
                                 cdh.setItem3(e.getString("gift_image_url")); //gift_image_url
                                 cdh.setItem4(e.getString("point_require")); //point_require
                                 cdh.setItem5(e.getString("point_require_text")); //point_require_text
-                                cdh.setItem6(e.optString("button_status")); //button_status
+//                                cdh.setItem6(e.optString("button_status")); //button_status ENABLE
+                                cdh.setItem6("ENABLE"); //button_status ENABLE
                                 cdh.setItem7(reader.optString("e_points")); //e_points
 
                                 pending_list.add(cdh);

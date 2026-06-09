@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="myAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="myAppTheme" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -38,5 +38,18 @@
 
     <style name="MyDialog" parent="Base.Theme.AppCompat.Light.Dialog">
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="WhiteDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="colorAccent">@color/red</item>
+    </style>
+
+    <style name="WhiteInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@android:color/white</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="hintTextColor">@color/colorDarkGray</item>
+        <item name="boxStrokeColor">@color/colorDarkGray</item>
     </style>
 </resources>

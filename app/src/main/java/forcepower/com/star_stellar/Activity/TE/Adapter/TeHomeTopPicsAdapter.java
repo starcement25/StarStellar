@@ -154,7 +154,7 @@ public class TeHomeTopPicsAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void giftInfo(String msg) {
         try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage(msg + "");
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

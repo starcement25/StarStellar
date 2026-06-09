@@ -22,12 +22,12 @@ android {
             keyPassword 'android'
         }
     }
-    compileSdk 34
+    compileSdk 36
 
     defaultConfig {
         applicationId "forcepower.com.star_stellar"
         minSdk 26
-        targetSdk 34
+        targetSdk 36
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         resourceConfigurations += ['en']
@@ -45,14 +45,14 @@ android {
             productFlavors {
                 star_stellar_ {
                     dimension = "one"
-                    buildConfigField  ("String", "API_URL", '"https://www.starstellar.com/"')
+                    buildConfigField  ("String", "API_URL", '"https://starstellar.com/"')
                 }
             }
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
     namespace 'forcepower.com.star_stellar'
 
@@ -71,6 +71,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.activity:activity:1.12.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.6.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'

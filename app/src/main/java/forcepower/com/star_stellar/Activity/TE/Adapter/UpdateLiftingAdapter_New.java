@@ -5,6 +5,7 @@ import static forcepower.com.star_stellar.Class.CommonClass.isInternetConnected;
 import static forcepower.com.star_stellar.Class.CommonClass.print_Log_d;
 import static forcepower.com.star_stellar.Class.SharedPrefData.set_E_id;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forcepower.com.star_stellar.Activity.TE.TeUpdateLiftingActivity;
@@ -130,6 +132,11 @@ public class UpdateLiftingAdapter_New extends RecyclerView.Adapter {
 
     public void setLoaded() {
         loading = false;
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFilter(final List<UpdateLiftingModel> val) {
+        this.studentList = new ArrayList<>(val);
+        notifyDataSetChanged();
     }
 
     @Override

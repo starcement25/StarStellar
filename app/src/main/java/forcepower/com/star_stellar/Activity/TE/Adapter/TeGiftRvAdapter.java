@@ -1,5 +1,8 @@
 package forcepower.com.star_stellar.Activity.TE.Adapter;
 
+import static forcepower.com.star_stellar.Class.CommonClass.checkInternetConnection;
+import static forcepower.com.star_stellar.Class.CommonClass.isInternetConnected;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 
@@ -7,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +18,14 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import forcepower.com.star_stellar.Activity.Engineer.GiftConfirmActivity;
 import forcepower.com.star_stellar.Class.CommonHelper;
 import forcepower.com.star_stellar.R;
 
@@ -134,7 +140,7 @@ public class TeGiftRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.tv_gift_item_price.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    /*if(isInternetConnected(myActivity))
+                    if(isInternetConnected(myActivity))
                     {
                         Intent intent = new Intent(myActivity, GiftConfirmActivity.class);
                         intent.putExtra("gift_id", values.get(position).getItem0()); //gift_id
@@ -151,7 +157,7 @@ public class TeGiftRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     else
                     {
                         Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
-                    }*/
+                    }
                 }
             });
         } else {
@@ -163,7 +169,7 @@ public class TeGiftRvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private void giftInfo(final String msg) {
         try {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage(msg + "");
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {

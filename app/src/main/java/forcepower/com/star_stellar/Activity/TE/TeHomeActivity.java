@@ -21,10 +21,20 @@ import androidx.appcompat.app.AlertDialog;
 
 import android.os.Handler;
 import android.text.Html;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -50,6 +60,7 @@ import cz.msebera.android.httpclient.Header;
 import forcepower.com.star_stellar.Activity.BlankActivity;
 import forcepower.com.star_stellar.Activity.Engineer.AboutStarCementActivity;
 import forcepower.com.star_stellar.Activity.Engineer.NotificationsActivity;
+import forcepower.com.star_stellar.Activity.GiftCategoryActivity;
 import forcepower.com.star_stellar.Activity.LoginStep1Activity;
 import forcepower.com.star_stellar.Activity.Engineer.Adapter.GridHomeAdapter;
 import forcepower.com.star_stellar.Activity.Engineer.Adapter.SideMenuListAdapter;
@@ -62,6 +73,8 @@ import forcepower.com.star_stellar.Class.CommonHelper;
 import forcepower.com.star_stellar.Class.SharedPrefData;
 import forcepower.com.star_stellar.R;
 
+import static forcepower.com.star_stellar.Class.AllUrl.store_token;
+import static forcepower.com.star_stellar.Class.AllUrl.terms_api;
 import static forcepower.com.star_stellar.Class.CommonClass.DEFAULT_TIMEOUT;
 import static forcepower.com.star_stellar.Class.AllUrl.playStoreUrl;
 import static forcepower.com.star_stellar.Class.AllUrl.show_latest_app_version;
@@ -100,7 +113,16 @@ public class TeHomeActivity extends BaseActivity {
     private RecyclerView rv_top_pics;
     private ArrayList<CommonHelper> top_pics_list = new ArrayList<>();
     private TeHomeTopPicsAdapter gAdapter;
-    private String update_checked = "No";
+    private String update_checked = "No",termsAndConditions;
+
+    //--------------------terms and condition popup--------------------
+    private LinearLayout reward_t_and_c_popup_layout;
+    private TextView reward_t_and_c_popup_text,popup_check_box_text;
+    private ImageView popup_check_box;
+    private Button popup_t_c_submit_button;
+    private int tc_popup_value=0;
+    private WebView webView;
+    //--------------------terms and condition popup--------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +130,7 @@ public class TeHomeActivity extends BaseActivity {
         setContentView(R.layout.activity_te_home);
         try {
             myActivity = this;
+            tc_popup_value=0;
 
             mLinearLayoutOption = (RelativeLayout) findViewById(R.id.option_layout);
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -253,7 +276,7 @@ public class TeHomeActivity extends BaseActivity {
 
     private void exit_Dialog() {
         try {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage("Do you want to exit?");
 
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -280,7 +303,7 @@ public class TeHomeActivity extends BaseActivity {
 
     private void logOut() {
         try {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage("Do you want to log out?");
 
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -313,7 +336,7 @@ public class TeHomeActivity extends BaseActivity {
         try {
             final CharSequence[] items = {"Email", "Phone", "WhatsApp"};
 
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Choose an option for contact with us");
@@ -418,7 +441,7 @@ public class TeHomeActivity extends BaseActivity {
 
     private void force_logout_Dialog(String msg) {
         try {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage(msg + "");
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
@@ -442,7 +465,7 @@ public class TeHomeActivity extends BaseActivity {
 
     private void app_version_Dialog(String msg) {
         try {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage(msg + "");
             builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
                 @Override
@@ -522,7 +545,7 @@ public class TeHomeActivity extends BaseActivity {
                     } else if (menu_item.equalsIgnoreCase("Lifting")) {
                         startActivity(new Intent(myActivity, TeUpdateLiftingActivity.class));
                     } else if (menu_item.equalsIgnoreCase("Catalogue")) {
-                        startActivity(new Intent(myActivity, TeGiftsActivity.class));
+                        reward_t_and_c_popup_layout.setVisibility(View.VISIBLE);
                     }
                 } else {
                     msg_Dialog(myActivity, checkInternetConnection, false);
@@ -539,9 +562,159 @@ public class TeHomeActivity extends BaseActivity {
         }
     }
 
+    public void fetchTermsAndConditions() {
+        try {
+            String url = terms_api;
+
+            final AsyncHttpClient client = new AsyncHttpClient();
+            client.setTimeout(DEFAULT_TIMEOUT);
+
+            print_Log_d("terms_U ", url);
+
+            client.get(url, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    final String str = new String(responseBody);
+                    try {
+                        print_Log_d("terms_R ", str + "");
+
+                        final JSONObject reader = new JSONObject(str);
+
+                        termsAndConditions = reader.optString("content");
+                        print_Log_d("terms_RR ", termsAndConditions);
+
+//                        if (reward_t_and_c_popup_text != null) {
+                            //reward_t_and_c_popup_text.setText(Html.fromHtml(termsAndConditions, android.text.Html.FROM_HTML_MODE_LEGACY));
+//                            reward_t_and_c_popup_text.setText(termsAndConditions);
+                            //reward_t_and_c_popup_text.setMovementMethod(LinkMovementMethod.getInstance());
+
+
+
+                            WebSettings webSettings = webView.getSettings();
+                            webSettings.setJavaScriptEnabled(true);
+                            webSettings.setLoadWithOverviewMode(true);
+                            webSettings.setUseWideViewPort(true);
+
+                            String htmlContent = termsAndConditions;
+
+                            String styledHtml = "<html>" +
+                                    "<head>" +
+                                    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                                    "<style>" +
+                                    "body { font-size: 14px; color: #333333; margin: 0; padding: 0; font-family: sans-serif; }" +
+                                    "* { max-width: 100%; }" +
+                                    "</style>" +
+                                    "</head>" +
+                                    "<body>" +
+                                    htmlContent +
+                                    "</body>" +
+                                    "</html>";
+
+                            webView.loadDataWithBaseURL(null, styledHtml, "text/html", "UTF-8", null);
+
+// Adjust WebView height based on content
+                            webView.setWebViewClient(new WebViewClient() {
+                                @Override
+                                public void onPageFinished(WebView view, String url) {
+                                    super.onPageFinished(view, url);
+
+                                    view.evaluateJavascript(
+                                            "(function() { return document.body.scrollHeight; })();",
+                                            height -> {
+                                                try {
+                                                    // Remove quotes from the returned value and handle null
+                                                    if (height != null && !height.equals("null")) {
+                                                        String cleanHeight = height.replace("\"", "");
+                                                        int contentHeight = Integer.parseInt(cleanHeight);
+                                                        float density = getResources().getDisplayMetrics().density;
+                                                        int minHeight = (int) (50 * density);
+                                                        int maxHeight = (int) (300 * density);
+
+                                                        ViewGroup.LayoutParams layoutParams = webView.getLayoutParams();
+                                                        if (contentHeight < minHeight) {
+                                                            layoutParams.height = minHeight;
+                                                        } else if (contentHeight > maxHeight) {
+                                                            layoutParams.height = maxHeight;
+                                                        } else {
+                                                            layoutParams.height = contentHeight;
+                                                        }
+                                                        webView.setLayoutParams(layoutParams);
+                                                    } else {
+                                                        // Set default height if JavaScript returns null
+                                                        ViewGroup.LayoutParams layoutParams = webView.getLayoutParams();
+                                                        layoutParams.height = (int) (150 * getResources().getDisplayMetrics().density);
+                                                        webView.setLayoutParams(layoutParams);
+                                                    }
+                                                } catch (NumberFormatException e) {
+                                                    e.printStackTrace();
+                                                    // Set default height on error
+                                                    ViewGroup.LayoutParams layoutParams = webView.getLayoutParams();
+                                                    layoutParams.height = (int) (150 * getResources().getDisplayMetrics().density);
+                                                    webView.setLayoutParams(layoutParams);
+                                                }
+                                            }
+                                    );
+                                }
+                            });
+
+
+                    } catch (final Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    print_Log_d("terms_Err ", error != null ? error.toString() : "Unknown error");
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setTermsWithReadMore(String link) {
+        try {
+            String readMoreText = "Read more";
+            String fullText = termsAndConditions + " " + readMoreText;
+
+            SpannableString spannableString = new SpannableString(fullText);
+
+            // Make "Read more" clickable
+            ClickableSpan clickableSpan = new ClickableSpan() {
+                @Override
+                public void onClick(View widget) {
+                    //String readMoreUrl = "https://dev.starstellar.com/terms-and-conditions"; // Change to your URL
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                    startActivity(browserIntent);
+                }
+
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setColor(getResources().getColor(R.color.red)); // Red color
+                    ds.setUnderlineText(true); // Underline
+                }
+            };
+
+            // Apply clickable span to "Read more" text only
+            int startIndex = fullText.indexOf(readMoreText);
+            int endIndex = startIndex + readMoreText.length();
+            spannableString.setSpan(clickableSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            reward_t_and_c_popup_text.setText(spannableString);
+            //reward_t_and_c_popup_text.setMovementMethod(LinkMovementMethod.getInstance());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void init() {
         try {
-
+            fetchTermsAndConditions();
+            storeTokenToServer();
             vp_slider = (ViewPager) findViewById(R.id.vp_slider);
             ll_dots = (LinearLayout) findViewById(R.id.ll_dots);
 
@@ -564,6 +737,128 @@ public class TeHomeActivity extends BaseActivity {
                 @Override
                 public void onPageScrollStateChanged(int state) {
 
+                }
+            });
+
+
+
+
+            reward_t_and_c_popup_layout=findViewById(R.id.reward_t_and_c_popup_layout);
+            //reward_t_and_c_popup_text=findViewById(R.id.reward_t_and_c_popup_text);
+             webView=findViewById(R.id.reward_t_and_c_popup_webview);
+            popup_check_box_text=findViewById(R.id.popup_check_box_text);
+            popup_check_box=findViewById(R.id.popup_check_box);
+            popup_t_c_submit_button=findViewById(R.id.popup_t_c_submit_button);
+
+            reward_t_and_c_popup_layout.setVisibility(View.GONE);
+            //reward_t_and_c_popup_text.setText(Html.fromHtml(termsAndConditions, android.text.Html.FROM_HTML_MODE_LEGACY));
+//            reward_t_and_c_popup_text.setText(termsAndConditions);
+//            reward_t_and_c_popup_text.setClickable(false);
+//            reward_t_and_c_popup_text.setFocusable(false);
+            //reward_t_and_c_popup_text.setMovementMethod(LinkMovementMethod.getInstance());
+
+            WebView webView = findViewById(R.id.reward_t_and_c_popup_webview);
+
+// Configure WebView settings
+            WebSettings webSettings = webView.getSettings();
+            webSettings.setJavaScriptEnabled(true); // MUST be enabled for evaluateJavascript to work
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setUseWideViewPort(true);
+
+// Set the HTML content from API response
+            String htmlContent = termsAndConditions; // Your HTML string from API
+
+// Load HTML with proper styling
+            String styledHtml = "<html>" +
+                    "<head>" +
+                    "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                    "<style>" +
+                    "body { font-size: 14px; color: #333333; margin: 0; padding: 0; font-family: sans-serif; }" +
+                    "* { max-width: 100%; }" +
+                    "</style>" +
+                    "</head>" +
+                    "<body>" +
+                    htmlContent +
+                    "</body>" +
+                    "</html>";
+
+            webView.loadDataWithBaseURL(null, styledHtml, "text/html", "UTF-8", null);
+
+// Adjust WebView height based on content
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    super.onPageFinished(view, url);
+
+                    view.evaluateJavascript(
+                            "(function() { return document.body.scrollHeight; })();",
+                            height -> {
+                                try {
+                                    // Remove quotes from the returned value and handle null
+                                    if (height != null && !height.equals("null")) {
+                                        String cleanHeight = height.replace("\"", "");
+                                        int contentHeight = Integer.parseInt(cleanHeight);
+                                        float density = getResources().getDisplayMetrics().density;
+                                        int minHeight = (int) (10 * density);
+                                        int maxHeight = (int) (300 * density);
+
+                                        ViewGroup.LayoutParams layoutParams = webView.getLayoutParams();
+                                        if (contentHeight < minHeight) {
+                                            layoutParams.height = minHeight;
+                                        } else if (contentHeight > maxHeight) {
+                                            layoutParams.height = maxHeight;
+                                        } else {
+                                            layoutParams.height = contentHeight;
+                                        }
+                                        webView.setLayoutParams(layoutParams);
+                                    } else {
+                                        // Set default height if JavaScript returns null
+                                        ViewGroup.LayoutParams layoutParams = webView.getLayoutParams();
+                                        layoutParams.height = (int) (150 * getResources().getDisplayMetrics().density);
+                                        webView.setLayoutParams(layoutParams);
+                                    }
+                                } catch (NumberFormatException e) {
+                                    e.printStackTrace();
+                                    // Set default height on error
+                                    ViewGroup.LayoutParams layoutParams = webView.getLayoutParams();
+                                    layoutParams.height = (int) (150 * getResources().getDisplayMetrics().density);
+                                    webView.setLayoutParams(layoutParams);
+                                }
+                            }
+                    );
+                }
+            });
+
+            reward_t_and_c_popup_layout.setOnClickListener(v -> {
+                reward_t_and_c_popup_layout.setVisibility(View.GONE);
+            });
+            popup_check_box_text.setOnClickListener(v -> {
+                if(tc_popup_value==0){
+                    tc_popup_value=1;
+                    popup_check_box.setImageResource(R.drawable.baseline_check_box_24);
+                }else{
+                    tc_popup_value=0;
+                    popup_check_box.setImageResource(R.drawable.baseline_check_box_outline_blank_24);
+                }
+            });
+            popup_check_box.setOnClickListener(v -> {
+                if(tc_popup_value==0){
+                    tc_popup_value=1;
+                    popup_check_box.setImageResource(R.drawable.baseline_check_box_24);
+                }else{
+                    tc_popup_value=0;
+                    popup_check_box.setImageResource(R.drawable.baseline_check_box_outline_blank_24);
+                }
+            });
+            popup_t_c_submit_button.setOnClickListener(v -> {
+                if(tc_popup_value==1) {
+                    reward_t_and_c_popup_layout.setVisibility(View.GONE);
+                    //startActivity(new Intent(myActivity, TeGiftsActivity.class));
+                    Intent intent = new Intent(myActivity, GiftCategoryActivity.class);
+                    intent.putExtra("isTE",true);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(this,"Accept terms & condition first",Toast.LENGTH_LONG).show();
                 }
             });
         } catch (Exception e) {
@@ -591,6 +886,44 @@ public class TeHomeActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void storeTokenToServer() {
+
+        final RequestParams params = new RequestParams();
+        params.put("user_id", get_TE_code(myActivity));
+        params.put("user_type", "TE");
+        params.put("token",get_firebase_token(myActivity));
+
+        final AsyncHttpClient client = new AsyncHttpClient();
+        client.setTimeout(DEFAULT_TIMEOUT);
+
+        client.post(store_token, params, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                dismissDialog();
+                try {
+                    String response = new String(responseBody);
+                    print_Log_d("storeTokenToServer", response);
+
+                    JSONObject json = new JSONObject(response);
+                    if (json.optString("process_status").equalsIgnoreCase("YES")) {
+                        //Toast.makeText(myActivity, "Token stored successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        //Toast.makeText(myActivity, "Failed to store token: " + json.optString("process_message"), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //Toast.makeText(myActivity, "Response parsing error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(myActivity, "API call failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

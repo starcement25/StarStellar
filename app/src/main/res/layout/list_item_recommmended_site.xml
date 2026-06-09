@@ -1,79 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_recommended"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F2F0F1"
-    android:padding="@dimen/left_right_margin_15dp"
-    android:id="@+id/ll_recommended"
-    >
+    android:orientation="horizontal"
+    android:padding="@dimen/left_right_margin_15dp">
+
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="6"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_weight="6"
+        android:orientation="vertical">
+
         <LinearLayout
             android:id="@+id/ll_P_eng_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
+
             <TextView
                 android:id="@+id/tv_P_eng_caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkGray_gb"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:text="Engineer name : "
-                android:maxLines="1"
                 android:ellipsize="end"
-                />
+                android:maxLines="1"
+                android:text="Engineer name : "
+                android:textColor="@color/colorDarkGray_gb"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_P_eng_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkGray"
-                android:textSize="12sp"
-                android:text=""
-                android:maxLines="1"
                 android:ellipsize="end"
-                />
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkGray_gb"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:text="Site name : "
-                android:maxLines="1"
                 android:ellipsize="end"
-                />
+                android:maxLines="1"
+                android:text="Site name : "
+                android:textColor="@color/colorDarkGray_gb"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_P_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkGray"
-                android:textSize="12sp"
-                android:text="Site name"
-                android:maxLines="1"
                 android:ellipsize="end"
-                />
+                android:maxLines="1"
+                android:text="Site name"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -84,45 +82,44 @@
                 android:textColor="@color/colorDarkGray_gb"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/tv_P_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorDarkGray"
-
-                android:textSize="12sp"
-                android:text="0000/00/00"
-                android:textStyle="bold"
-                android:maxLines="1"
                 android:ellipsize="end"
-                />
+                android:maxLines="1"
+                android:text="0000/00/00"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight=".5"
         android:layout_gravity="center"
-        android:gravity="center"
-        >
+        android:layout_weight=".5"
+        android:gravity="center">
+
         <TextView
             android:id="@+id/tv_status_circle"
             android:layout_width="@dimen/left_right_margin_15dp"
             android:layout_height="@dimen/left_right_margin_15dp"
-            android:background="@drawable/border_ring_white"
-            />
+            android:background="@drawable/border_ring_white" />
     </LinearLayout>
+
     <ImageView
         android:layout_width="@dimen/left_right_margin_15dp"
         android:layout_height="@dimen/left_right_margin_15dp"
-        android:src="@drawable/drop"
-        android:rotation="270"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
-        />
+        android:rotation="270"
+        android:src="@drawable/drop" />
+
     <TextView
         android:id="@+id/tv_json_row"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        />
+        android:layout_height="0dp" />
 </LinearLayout>

@@ -82,7 +82,7 @@ import static forcepower.com.star_stellar.Class.SharedPrefData.get_TE_code;
 public class TeRecommendationDetails_P extends BaseActivity
 {
     private Activity myActivity;
-    private String json_row = "", r_site_id = "", expected_product_id = "";
+    private String json_row = "", r_site_id = "", expected_product_id = "",expected_product_name="";
     private ListView lv_recom_details, lv_te_eng;
     private ArrayList<CommonHelper> menu_item_list = new ArrayList<>();
     private ArrayList<CommonHelper> eng_details_list = new ArrayList<>();
@@ -125,6 +125,7 @@ public class TeRecommendationDetails_P extends BaseActivity
             final JSONObject e = new JSONObject(json_row);
             String r_recomended_site_image_url = e.getString("r_recomended_site_image_url");
             print_Log_d("r_recomended_site_image_url", r_recomended_site_image_url);
+            print_Log_d("r_recomended_site_oo", json_row);
             ImageView iv_mySite_ = (ImageView) findViewById(R.id.iv_mySite_);
             lv_recom_details = (ListView) findViewById(R.id.lv_recom_details);
             lv_te_eng = (ListView) findViewById(R.id.lv_te_eng);
@@ -132,6 +133,7 @@ public class TeRecommendationDetails_P extends BaseActivity
             engAdapter = new MySiteDetailsAdapter(this, eng_details_list);
             lv_recom_details.setAdapter(myAdapter);
             lv_te_eng.setAdapter(engAdapter);
+            print_Log_d("r_recomended_site_op", e.getString("expected_product_name"));
 
             Glide.with(myActivity).load(r_recomended_site_image_url)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -148,6 +150,9 @@ public class TeRecommendationDetails_P extends BaseActivity
             et_Name = (EditText) findViewById(R.id.et_Name);
             et_Area = (EditText) findViewById(R.id.et_Area);
             et_Contact_Number = (EditText) findViewById(R.id.et_Contact_Number);
+            et_Select_product.setText(e.getString("expected_product_name"));
+            et_Consumption.setText(e.getString("expected_consumption"));
+            expected_product_id = e.getString("expected_product_id");
             et_Select_product.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -173,7 +178,7 @@ public class TeRecommendationDetails_P extends BaseActivity
     {
         try
         {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Expected Product to be Used");
@@ -599,7 +604,7 @@ public class TeRecommendationDetails_P extends BaseActivity
     {
         try
         {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             // Get the layout inflater
             LayoutInflater inflater = myActivity.getLayoutInflater();

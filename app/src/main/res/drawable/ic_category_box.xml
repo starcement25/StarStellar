@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ic_category_box.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Box outline -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M21,16V8C20.999,7.645 20.906,7.296 20.73,6.988C20.554,6.68 20.301,6.424 19.996,6.245L12.996,2.245C12.69,2.065 12.348,1.97 12,1.97C11.652,1.97 11.31,2.065 11.004,2.245L4.004,6.245C3.699,6.424 3.446,6.68 3.27,6.988C3.094,7.296 3.001,7.645 3,8V16C3.001,16.355 3.094,16.704 3.27,17.012C3.446,17.32 3.699,17.576 4.004,17.755L11.004,21.755C11.31,21.935 11.652,22.03 12,22.03C12.348,22.03 12.69,21.935 12.996,21.755L19.996,17.755C20.301,17.576 20.554,17.32 20.73,17.012C20.906,16.704 20.999,16.355 21,16Z" />
+    <!-- Left face line -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M3.27,6.96L12,12.01L20.73,6.96" />
+    <!-- Center vertical line -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M12,22.08V12" />
+</vector>

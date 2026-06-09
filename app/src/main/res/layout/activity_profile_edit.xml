@@ -3,215 +3,245 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
     <LinearLayout
+        android:id="@+id/llTopView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llTopView"
-        android:background="@color/colorHeaderView"
-        >
+        android:background="@color/colorHeaderView">
+
         <include
             android:id="@+id/headeView"
-            layout="@layout/common_header"
-            />
+            layout="@layout/common_header" />
     </LinearLayout>
+
     <LinearLayout
-        android:layout_below="@+id/llTopView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:layout_below="@+id/llTopView"
+        android:orientation="vertical">
+
         <RelativeLayout
+            android:id="@+id/rl_Star_Logo_P"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorGray"
-            android:id="@+id/rl_Star_Logo_P"
-            android:gravity="center"
-            >
+            android:gravity="center">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_Star_Logo_B"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:src="@drawable/profile_bg"
                 android:layout_centerInParent="true"
                 android:onClick="chooseYourImage_P"
-                />
+                android:src="@drawable/profile_bg" />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_Star_Logo_F"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/profile_icon"
                 android:layout_centerInParent="true"
-                />
+                android:src="@drawable/profile_icon" />
+
             <ImageView
                 android:id="@+id/iv_Star_Logo_Cam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/cam"
                 android:layout_centerInParent="true"
-                app:tint="@color/red"
                 android:adjustViewBounds="true"
-                />
+                android:src="@drawable/cam"
+                app:tint="@color/red" />
 
         </RelativeLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            >
+            android:scrollbars="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:layout_margin="@dimen/left_right_margin_15dp"
-                    >
+                    android:orientation="vertical">
                     <!--android:theme="@style/myTextInputLayout"-->
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
                             android:hint="Name *"
-                            android:singleLine="true"
                             android:maxLength="99"
-                            android:textSize="12sp"
-                            />
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        >
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_birthday"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
-                            android:hint="Date of Birth"
-                            android:singleLine="true"
-                            android:maxLength="10"
-                            android:textSize="12sp"
                             android:enabled="false"
-                            />
+                            android:hint="Date of Birth"
+                            android:maxLength="10"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_anniversary"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
-                            android:hint="Date of Marriage"
-                            android:singleLine="true"
-                            android:maxLength="10"
-                            android:textSize="12sp"
                             android:enabled="false"
-                            />
+                            android:hint="Date of Marriage"
+                            android:maxLength="10"
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
-                            android:hint="Address *"
                             android:gravity="top|left"
+                            android:hint="Address *"
+                            android:inputType="textMultiLine"
                             android:maxLength="500"
                             android:maxLines="16"
-                            android:textSize="12sp"
-                            android:inputType="textMultiLine"
-                            />
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_pincode"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
-                            android:hint="Pincode *"
                             android:gravity="top|left"
+                            android:hint="Pincode *"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
                             android:maxLength="6"
                             android:maxLines="1"
-                            android:textSize="12sp"
-                            android:inputType="number"
-                            android:imeOptions="actionNext"
-                            />
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_state"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
                             android:hint="State *"
-                            android:singleLine="true"
-                            android:inputType="text"
                             android:imeOptions="actionNext"
+                            android:inputType="text"
                             android:maxLength="99"
-                            android:textSize="12sp"
-                            />
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
+                        style="@style/WhiteInputLayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/colorDarkGray">
 
                         <EditText
                             android:id="@+id/et_P_city_town"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/left_right_margin_15dp"
                             android:hint="City/Town *"
-                            android:singleLine="true"
-                            android:inputType="text"
                             android:imeOptions="actionDone"
+                            android:inputType="text"
                             android:maxLength="99"
-                            android:textSize="12sp"
-                            />
+                            android:padding="@dimen/left_right_margin_15dp"
+                            android:singleLine="true"
+                            android:textColor="@color/colorBlack"
+                            android:textColorHint="@color/colorDarkGray"
+                            android:textSize="12sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="UPDATE"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="@dimen/left_right_margin_15dp"
                         android:layout_margin="25dp"
-
                         android:background="@drawable/border_red"
-                        android:textColor="@color/green"
                         android:clickable="true"
+                        android:gravity="center"
                         android:onClick="update_profile"
-                        />
+                        android:padding="@dimen/left_right_margin_15dp"
+                        android:text="UPDATE"
+                        android:textColor="@color/green" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>

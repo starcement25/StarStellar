@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F2F0F1">
     <LinearLayout
@@ -27,4 +28,207 @@
         android:layout_marginRight="@dimen/left_right_margin_3dp"
         android:visibility="visible"
         />
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tvNoData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/llTopView"
+        android:text="No items found"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/popup_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- Popup Card -->
+        <LinearLayout
+            android:id="@+id/llPopup"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@drawable/bg_popup_rounded"
+            android:elevation="10dp">
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Contact Info"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:paddingVertical="16dp"
+                android:background="@drawable/bg_round_red"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <!-- 🔴 INFO / WARNING MESSAGE (NEW – ADDED ONLY) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:padding="12dp"
+                android:background="#FFE5E5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please check your contact information before redeeming points."
+                    android:textColor="#D32F2F"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You can update it, if required."
+                    android:textColor="#D32F2F"
+                    android:textSize="11sp"
+                    android:layout_marginTop="4dp" />
+            </LinearLayout>
+
+            <!-- Email Field -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email Address"
+                android:textColor="@color/colorBlack"
+                android:inputType="textEmailAddress"
+                android:drawableStart="@android:drawable/ic_dialog_email"
+                android:padding="8dp"
+                android:textSize="12sp"
+                android:drawableTint="@color/green"
+                android:drawablePadding="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginTop="6dp" />
+
+            <!-- Phone Field -->
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:layout_marginHorizontal="20dp"
+                android:drawablePadding="10dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="12sp"
+                android:maxLength="10"
+                android:drawableTint="@color/green"
+                android:inputType="phone"
+                android:drawableStart="@android:drawable/ic_menu_call"
+                android:padding="8dp"
+                android:background="@drawable/edittext_background"
+                android:layout_marginTop="10dp" />
+
+            <!-- Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submit"
+                    android:paddingHorizontal="10dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/green"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="10dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#70000000"
+            android:id="@+id/reward_t_and_c_popup_layout"
+            android:padding="15dp"
+            android:gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/popup_design_t_and_c"
+                android:orientation="vertical"
+                android:elevation="3dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/popup_header_t_and_c"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Terms &amp; Condition"
+                        android:textSize="16dp"
+                        android:textFontWeight="600"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="15dp"
+                    android:orientation="vertical">
+                    <WebView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reward_t_and_c_popup_webview"
+                        android:minHeight="50dp"
+                        android:maxHeight="300dp"
+                        android:scrollbars="vertical"/>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:id="@+id/popup_check_box"
+                            android:src="@drawable/baseline_check_box_outline_blank_24"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/popup_check_box_text"
+                            android:text="  Accept T &amp; C"
+                            android:textColor="@color/red"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"/>
+                    <Button
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/popup_t_c_submit_button"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Submit"
+                        android:textColor="@color/white"
+                        android:background="@drawable/button_background_red"
+                        android:textAllCaps="false"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+</FrameLayout>
+
+    </RelativeLayout>

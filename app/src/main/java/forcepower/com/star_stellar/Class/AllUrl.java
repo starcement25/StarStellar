@@ -51,4 +51,13 @@ public class AllUrl {
 
     public static final String ws_save_order_query_data = baseUrl + "ws_save_order_query_data.php";
     public static final String ws_order_query_data_download = baseUrl + "ws_order_query_data_download.php";
+    public static final String terms_api = baseUrl + "terms_api.php";
+    public static  String api_save_feedback = baseUrl + "api_save_feedback.php";
+    public static String last_order_delivered_api = baseUrl + "last_order_delivered_api.php";
+    public static String store_token = baseUrl + "store_token.php";
+    public static String get_last_order_contact = baseUrl + "get_last_order_contact.php";
+    public static String get_engineer_dob = baseUrl + "get-engineer-dob.php";
+    public static String update_engineer_dob = baseUrl + "update_engineer_dob.php";
+    public static String engineer_birthday_wish_seen = baseUrl + "engineer_birthday_wish_seen.php";
+    public static String category_list = baseUrl + "category-list.php";
 }

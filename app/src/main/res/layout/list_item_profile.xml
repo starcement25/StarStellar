@@ -13,21 +13,19 @@
     <TextView
         android:id="@+id/tv_P_item"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkGray"
-        android:textSize="12sp"
+        android:textColor="@color/colorDarkGray_gb"
+        android:textSize="13sp"
         android:text="Item"
-
         android:layout_gravity="center"
         />
     <TextView
         android:id="@+id/tv_P_details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorDarkGray_gb"
+        android:textColor="@color/colorBlack"
         android:textStyle="bold"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:text="@string/app_name"
         android:layout_gravity="center"
         android:layout_marginStart="9dp"

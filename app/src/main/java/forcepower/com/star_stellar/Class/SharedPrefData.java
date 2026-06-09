@@ -232,6 +232,10 @@ public class SharedPrefData {
         editor.apply();
     }
 
+    public static String get_E_email(final Context ctx) {
+        return getSharedPreferences(ctx).getString(KEY_SET_E_email, "");
+    }
+
     public static String get_TE_email(final Context ctx) {
         return getSharedPreferences(ctx).getString(KEY_SET_TE_email, "");
     }

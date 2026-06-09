@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
+import forcepower.com.star_stellar.Activity.Engineer.DataSet.OrderDataSet;
 import forcepower.com.star_stellar.Class.CommonHelper;
 import forcepower.com.star_stellar.R;
 
@@ -125,7 +126,7 @@ public class MyOrderDeliveredAdapter_Profile extends BaseAdapter {
 
     private void order_help_dialog(final String order_id) {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             // Get the layout inflater
             LayoutInflater inflater = myActivity.getLayoutInflater();
@@ -142,7 +143,7 @@ public class MyOrderDeliveredAdapter_Profile extends BaseAdapter {
             dialog.show();
 
             final EditText et_gift_comments = (EditText) dialog.findViewById(R.id.et_gift_comments);
-            final RadioGroup rg_gift_help = (RadioGroup) dialog.findViewById(R.id.rg_gift_help);
+            //final RadioGroup rg_gift_help = (RadioGroup) dialog.findViewById(R.id.rg_gift_help);
 //			rg_gift_help.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //				@Override
 //				public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -167,9 +168,9 @@ public class MyOrderDeliveredAdapter_Profile extends BaseAdapter {
                 public void onClick(View v) {
 
                     if (isInternetConnected(myActivity)) {
-                        int selectedId = rg_gift_help.getCheckedRadioButtonId();
-                        RadioButton radioSexButton = (RadioButton) dialog.findViewById(selectedId);
-                        continueGiftHelp(radioSexButton.getText().toString(), order_id, et_gift_comments.getText().toString().trim() + "");
+                        //int selectedId = rg_gift_help.getCheckedRadioButtonId();
+                        //RadioButton radioSexButton = (RadioButton) dialog.findViewById(selectedId);
+                        //continueGiftHelp(radioSexButton.getText().toString(), order_id, et_gift_comments.getText().toString().trim() + "");
                     } else {
                         Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
                     }

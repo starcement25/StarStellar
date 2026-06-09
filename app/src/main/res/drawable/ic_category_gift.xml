@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ic_category_gift.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Box body -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M20,12V22H4V12" />
+    <!-- Ribbon top bar -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M22,7H2V12H22V7Z" />
+    <!-- Center line -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M12,22V7" />
+    <!-- Left bow -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M12,7C12,7 10,4 8,4C6,4 6,7 8,7C10,7 12,7 12,7Z" />
+    <!-- Right bow -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M12,7C12,7 14,4 16,4C18,4 18,7 16,7C14,7 12,7 12,7Z" />
+</vector>

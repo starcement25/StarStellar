@@ -69,6 +69,7 @@ public class TeUpdateLiftingActivity extends BaseActivity {
     private RecyclerView rv_Pending;
     private int page_no_E = 1;
     private final ArrayList<ExistingSiteModel> exisitng_site_list = new ArrayList<>();
+    private List<UpdateLiftingModel> full_p_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +106,36 @@ public class TeUpdateLiftingActivity extends BaseActivity {
             pAdapter = new UpdateLiftingAdapter_New(myActivity, p_list, rv_Pending);
             rv_Pending.setAdapter(pAdapter);
 
+            final EditText et_search_bar = findViewById(R.id.et_search_bar);
+            final ImageView iv_search_clear = findViewById(R.id.iv_search_clear);
+
+            iv_search_clear.setOnClickListener(v -> et_search_bar.setText(""));
+
+            et_search_bar.addTextChangedListener(new TextWatcher() {
+                @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                @Override public void afterTextChanged(Editable s) {}
+
+                @Override
+                public void onTextChanged(CharSequence cs, int start, int before, int count) {
+                    String query = cs.toString().toLowerCase().trim();
+                    iv_search_clear.setVisibility(query.isEmpty() ? View.GONE : View.VISIBLE);
+
+                    if (query.isEmpty()) {
+                        pAdapter.setFilter(full_p_list);
+                        return;
+                    }
+
+                    final List<UpdateLiftingModel> filtered = new ArrayList<>();
+                    for (UpdateLiftingModel item : full_p_list) {
+                        if (item.getE_name().toLowerCase().contains(query) ||
+                                item.getE_mobile().toLowerCase().contains(query)) {
+                            filtered.add(item);
+                        }
+                    }
+                    pAdapter.setFilter(filtered);
+                }
+            });
+
             if (isInternetConnected(myActivity)) {
                 get_Engineer_details(1, "fresh_e");
                 pAdapter.setOnLoadMoreListener(new OnLoadMoreListener_MyEng() {
@@ -112,6 +143,7 @@ public class TeUpdateLiftingActivity extends BaseActivity {
                     public void onLoadMore() {
                         if (page_no_E > 0) {
                             p_list.add(null);
+
                             pAdapter.notifyItemInserted(p_list.size() - 1);
 
                             handler_p.postDelayed(new Runnable() {
@@ -152,16 +184,19 @@ public class TeUpdateLiftingActivity extends BaseActivity {
                     final JSONObject reader = new JSONObject(str);
                     print_Log_d("ws_show_approved_mapped_engineers_for_te ", str + "");
 
+
                     if (reader.optString("process_status").equalsIgnoreCase("YES")) {
                         page_no_E++;
                         String pending_recommendation_data = reader.getString("engineer_data");
                         JSONArray ja = new JSONArray(pending_recommendation_data);
+                        print_Log_d("ws_show_approved_mapped_engineers_for_te ", ja.toString());
                         if (ja.length() > 0) {
                             if (type.matches("add_e")) {
                                 p_list.remove(p_list.size() - 1);
                                 pAdapter.notifyItemRemoved(p_list.size());
                             } else {
                                 p_list.clear();
+                                full_p_list.clear();
                             }
 
                             for (int i = 0; i < ja.length(); i++) {
@@ -176,6 +211,7 @@ public class TeUpdateLiftingActivity extends BaseActivity {
                                 uL.set_json_row(e.toString());
 
                                 p_list.add(uL);
+                                full_p_list.add(uL);
 
                                 if (type.matches("add_e")) {
                                     pAdapter.notifyItemInserted(p_list.size());
@@ -256,6 +292,7 @@ public class TeUpdateLiftingActivity extends BaseActivity {
                     if (reader.optString("process_status").equalsIgnoreCase("YES")) {
                         final String my_recommended_site_data = reader.getString("my_recommended_site_data");
                         JSONArray ja = new JSONArray(my_recommended_site_data);
+                        print_Log_d("abcd ", ja.toString());
                         exisitng_site_list.clear();
                         for (int i = 0; i < ja.length(); i++) {
                             final JSONObject e = ja.getJSONObject(i);
@@ -304,7 +341,7 @@ public class TeUpdateLiftingActivity extends BaseActivity {
 
     public void existing_Site_Dialog() {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Existing Site List");
@@ -349,7 +386,11 @@ public class TeUpdateLiftingActivity extends BaseActivity {
                 public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
                     try {
                         Intent intent = new Intent(myActivity, TeRecommendationDetails_UL.class);
-                        intent.putExtra("recommended_site_details", exisitng_site_list.get(index).get_json_row());//json_row
+                        ExistingSiteModel item = (ExistingSiteModel) adapterView.getItemAtPosition(index);
+                        intent.putExtra("recommended_site_details", item);//json_row
+
+                        print_Log_d("abcd ", exisitng_site_list.get(index).get_json_row().toString());
+                        print_Log_d("abcdd ", item.get_json_row());
                         myActivity.startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();

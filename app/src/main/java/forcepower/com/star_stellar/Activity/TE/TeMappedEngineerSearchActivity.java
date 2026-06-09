@@ -286,7 +286,7 @@ public class TeMappedEngineerSearchActivity extends BaseActivity {
         try {
             items = new CharSequence[]{"All", "Active", "Inactive", "Semi Active"};
 
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Filter by : ");

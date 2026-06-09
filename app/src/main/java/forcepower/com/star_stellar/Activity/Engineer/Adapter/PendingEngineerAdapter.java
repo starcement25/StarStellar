@@ -124,7 +124,7 @@ public class PendingEngineerAdapter extends BaseAdapter {
 
     private void reject_confirm_dialog(final String eid) {
         try {
-            AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             builder.setMessage("Are you want to reject?");
 
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -163,7 +163,7 @@ public class PendingEngineerAdapter extends BaseAdapter {
             }
             final CharSequence[] items = data;
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Please select the Branch");

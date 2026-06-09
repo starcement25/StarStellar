@@ -208,7 +208,7 @@ public class ProfileEditActivity extends BaseActivity {
         mMP = new MarshMallowPermission(myActivity);
         final CharSequence[] items = {"Camera", "Gallery"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
         final TextView tvCPopup = new TextView(myActivity);
         tvCPopup.setText("Upload profile image");

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/ic_category_heart.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#2D2D2D"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M20.84,4.61C20.33,4.099 19.724,3.694 19.056,3.417C18.388,3.141 17.671,2.999 16.947,2.999C16.222,2.999 15.505,3.141 14.837,3.417C14.169,3.694 13.563,4.099 13.053,4.61L12,5.67L10.947,4.61C9.916,3.579 8.519,3 7.053,3C5.586,3 4.189,3.579 3.158,4.61C2.127,5.641 1.548,7.038 1.548,8.505C1.548,9.972 2.127,11.369 3.158,12.4L4.21,13.45L12,21.23L19.79,13.45L20.84,12.4C21.351,11.889 21.756,11.283 22.032,10.615C22.308,9.947 22.45,9.23 22.45,8.505C22.45,7.78 22.308,7.063 22.032,6.395C21.756,5.727 21.351,5.121 20.84,4.61Z" />
+</vector>

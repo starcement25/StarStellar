@@ -325,7 +325,7 @@ public class NewSiteActivity extends BaseActivity {
         try {
             final CharSequence[] items = cont_per_list.toArray(new CharSequence[cont_per_list.size()]);
 
-            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Contact person category");
@@ -374,7 +374,7 @@ public class NewSiteActivity extends BaseActivity {
 
     public void expectedProd_Dialog() {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText("Expected Product to be Used");

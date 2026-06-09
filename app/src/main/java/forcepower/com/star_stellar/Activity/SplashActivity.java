@@ -12,13 +12,16 @@ import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,11 +57,53 @@ import static forcepower.com.star_stellar.Class.SharedPrefData.set_server_curren
 
 public class SplashActivity extends BaseActivity {
     private Activity myActivity;
+    private static final int REQUEST_NOTIFICATION_PERMISSION = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_splash);
+        requestNotificationPermissionIfNeeded();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_NOTIFICATION_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+                callNextFunction();
+            } else {
+                // Permission denied
+                Toast.makeText(this, "Notification permission denied", Toast.LENGTH_SHORT).show();
+                callNextFunction();
+            }
+        }
+    }
+
+    private void requestNotificationPermissionIfNeeded() {
+        // Only for Android 13+ (API 33+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Permission not granted → request it
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        REQUEST_NOTIFICATION_PERMISSION);
+            } else {
+                // Permission already granted
+                callNextFunction();
+            }
+        } else {
+            // Permission not needed for < Android 13
+            callNextFunction();
+        }
+    }
+
+    private void callNextFunction(){
         try {
             myActivity = SplashActivity.this;
 
@@ -73,6 +118,7 @@ public class SplashActivity extends BaseActivity {
                     .addOnCompleteListener(new OnCompleteListener<String>() {
                         @Override
                         public void onComplete(@NonNull Task<String> task) {
+                            Log.d("TAG", "onComplete: "+task.getResult());
                             if (!task.isSuccessful()) {
                                 print_Log_d("Fetching FCM registration token failed", task.getException().toString());
                                 set_firebase_token(myActivity, "dummy");

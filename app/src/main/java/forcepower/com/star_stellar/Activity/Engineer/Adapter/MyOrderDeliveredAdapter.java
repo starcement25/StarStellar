@@ -1,23 +1,25 @@
 package forcepower.com.star_stellar.Activity.Engineer.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.graphics.Paint;
+import android.content.Intent;
+import android.net.Uri;
+import android.text.TextUtils;   // 🔹 IMPORTANT
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -25,12 +27,14 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import cz.msebera.android.httpclient.Header;
+import forcepower.com.star_stellar.Activity.Engineer.DataSet.OrderDataSet;
 import forcepower.com.star_stellar.Activity.Engineer.MyOrdersActivity;
-import forcepower.com.star_stellar.Class.CommonHelper;
 import forcepower.com.star_stellar.R;
 
+import static forcepower.com.star_stellar.Class.AllUrl.api_save_feedback;
 import static forcepower.com.star_stellar.Class.AllUrl.ws_submit_support_with_respect_to_order;
 import static forcepower.com.star_stellar.Class.CommonClass.DEFAULT_TIMEOUT;
 import static forcepower.com.star_stellar.Class.CommonClass.checkInternetConnection;
@@ -38,13 +42,14 @@ import static forcepower.com.star_stellar.Class.CommonClass.isInternetConnected;
 import static forcepower.com.star_stellar.Class.CommonClass.print_Log_d;
 import static forcepower.com.star_stellar.Class.SharedPrefData.get_E_id;
 
-
 public class MyOrderDeliveredAdapter extends BaseAdapter {
 
-    private Activity myActivity;
-    private ArrayList<CommonHelper> p_item_list = new ArrayList<>();
+    private final Activity myActivity;
+    private final ArrayList<OrderDataSet> p_item_list;
+    private String temp__ = "YES";
+    private ProgressDialog progressDialogObj;
 
-    public MyOrderDeliveredAdapter(Activity myActivity, ArrayList<CommonHelper> p_item_list_) {
+    public MyOrderDeliveredAdapter(Activity myActivity, ArrayList<OrderDataSet> p_item_list_) {
         this.myActivity = myActivity;
         this.p_item_list = p_item_list_;
     }
@@ -55,200 +60,202 @@ public class MyOrderDeliveredAdapter extends BaseAdapter {
     }
 
     @Override
-    public CommonHelper getItem(int position) {
-
+    public OrderDataSet getItem(int position) {
         return p_item_list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-
         return 0;
     }
 
+    @SuppressLint({"SetTextI18n", "InflateParams"})
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        final LayoutInflater mInflater = (LayoutInflater) myActivity
-                .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        ViewHolder holder;
+        final LayoutInflater mInflater = (LayoutInflater) myActivity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_item_my_order_delivered, null);
             holder = new ViewHolder();
 
-            holder.tv_P_item = (TextView) convertView.findViewById(R.id.tv_P_item);
-            holder.tv_P_details = (TextView) convertView.findViewById(R.id.tv_P_details);
-            holder.iv_gift_item = (ImageView) convertView.findViewById(R.id.iv_gift_item);
-            holder.tv_P_order_id = (TextView) convertView.findViewById(R.id.tv_P_order_id);
-            holder.tv_order_del_date = (TextView) convertView.findViewById(R.id.tv_order_del_date);
-            holder.tv_json_row = (TextView) convertView.findViewById(R.id.tv_json_row);
-            holder.tv_support = (TextView) convertView.findViewById(R.id.tv_support);
-            holder.tv_gift_delivered = (TextView) convertView.findViewById(R.id.tv_gift_delivered);
-
-            holder.tv_p_TYPE = (TextView) convertView.findViewById(R.id.tv_p_TYPE);
-            holder.tv_p_Comments = (TextView) convertView.findViewById(R.id.tv_p_Comments);
-            holder.tv_p_Status = (TextView) convertView.findViewById(R.id.tv_p_Status);
+            holder.textViewProductName = convertView.findViewById(R.id.textViewProductName);
+            holder.textViewProductCount = convertView.findViewById(R.id.textViewProductCount);
+            holder.textViewOrderId = convertView.findViewById(R.id.textViewOrderId);
+            holder.textViewDeliveryDate = convertView.findViewById(R.id.textViewDeliveryDate);
+            holder.complaintButton = convertView.findViewById(R.id.complaintButton);
+            holder.acknowledgementButton = convertView.findViewById(R.id.acknowledgementButton);
+            holder.btnNotDelivered = convertView.findViewById(R.id.btnNotDelivered);
+            holder.textViewOrderStatus = convertView.findViewById(R.id.textViewOrderStatus);
+            holder.trackOrderButton = convertView.findViewById(R.id.trackOrderButton);
+            holder.trackingOrderId = convertView.findViewById(R.id.tvAmazonOrderId);
+            holder.llTrackingId = convertView.findViewById(R.id.llTrackingId);
+            holder.tvDate = convertView.findViewById(R.id.tvDate);
+            holder.tvRemarks = convertView.findViewById(R.id.tvRemarks);
+            holder.llRemarks = convertView.findViewById(R.id.llRemarks);
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.tv_support.setText("SUPPORT");
-        holder.tv_support.setPaintFlags(holder.tv_support.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        holder.tv_support.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                order_help_dialog(p_item_list.get(position).getItem5());
-            }
-        });
-        Glide.with(myActivity).load(p_item_list.get(position).getItem1())
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .dontAnimate()
-                .into(holder.iv_gift_item);
-        holder.tv_P_item.setText(p_item_list.get(position).getItem0());
-        holder.tv_P_details.setText(p_item_list.get(position).getItem4()); //point_taken_text
-        holder.tv_P_details.setPadding(5, 0, 5, 0);
-        holder.tv_P_order_id.setText("Order id : " + p_item_list.get(position).getItem5()); //order_id
+        OrderDataSet item = p_item_list.get(position);
 
-        holder.tv_p_TYPE.setText(p_item_list.get(position).getItem8());
-        holder.tv_p_Comments.setText(p_item_list.get(position).getItem9());
-        holder.tv_p_Status.setText(p_item_list.get(position).getItem2());
+        // Set text fields
+        holder.textViewProductName.setText(item.getProductName());
+        holder.tvDate.setText(item.getDate());
+        if(item.getTvRemarks().length() > 0 && item.getTvRemarks() != "null"){
+            Log.d("remarks---",item.getTvRemarks());
+            holder.llRemarks.setVisibility(View.VISIBLE);
+            holder.tvRemarks.setText(item.getTvRemarks());
+        }else{
+            holder.llRemarks.setVisibility(View.GONE);
 
-        if (!p_item_list.get(position).getItem6().matches("")) {
-            holder.tv_order_del_date.setText("Delivery Date : " + p_item_list.get(position).getItem6()); //delivery_date
-
-        } else {
-            holder.tv_order_del_date.setText("Delivery Date : To be Updated"); //delivery_date
         }
 
-        holder.tv_json_row.setText(p_item_list.get(position).getItem3());
+        // 🔹 ROW-WISE POINTS / TDS / TOTAL
+        holder.textViewProductCount.setText(buildPointsBlock(item));
 
-        if (p_item_list.get(position).getItem7().equalsIgnoreCase("Yes")) {
-            holder.tv_gift_delivered.setVisibility(View.GONE);
+        holder.textViewOrderId.setText("Order id : " + item.getOrderId());
+        holder.textViewDeliveryDate.setText(
+                item.getDateOfDeliver().isEmpty()
+                        ? "Delivery Date : To be Updated"
+                        : "Delivery Date : " + item.getDateOfDeliver()
+        );
+        holder.textViewOrderStatus.setText(item.getOrderStatus());
+
+        // Tracking id visibility
+        if (item.getAmazonOrderId().isEmpty()) {
+            holder.llTrackingId.setVisibility(View.GONE);
+            holder.trackingOrderId.setText("-");
         } else {
-            holder.tv_gift_delivered.setVisibility(View.VISIBLE);
+            holder.llTrackingId.setVisibility(View.VISIBLE);
+            holder.trackingOrderId.setText(item.getAmazonOrderId());
         }
-        holder.tv_gift_delivered.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                order_Delivered(p_item_list.get(position).getItem5(), p_item_list.get(position).getItem7());
 
+        // Track order button (link)
+        if (item.getAmazonOrderLink().isEmpty()) {
+            holder.trackOrderButton.setVisibility(View.GONE);
+        } else {
+            holder.trackOrderButton.setVisibility(View.VISIBLE);
+            holder.trackOrderButton.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(item.getAmazonOrderLink()));
+                v.getContext().startActivity(intent);
+            });
+        }
+
+        // ✅ Button visibility logic
+        String ackFlag = item.getAcknowledgement_btn();
+        String feedbackFlag = item.getFeedbackButton();
+
+        boolean showAck = "YES".equalsIgnoreCase(ackFlag);
+        boolean showFeedback = "YES".equalsIgnoreCase(feedbackFlag);
+
+        // Acknowledge Delivery button
+        holder.acknowledgementButton.setVisibility(showAck ? View.VISIBLE : View.GONE);
+
+        // Not Delivered button – show using same condition as Acknowledge Delivery
+        holder.btnNotDelivered.setVisibility(showAck ? View.VISIBLE : View.GONE);
+
+        // Feedback / Complaint button
+        holder.complaintButton.setVisibility(showFeedback ? View.VISIBLE : View.GONE);
+
+        // ✅ Acknowledge Delivery click with alert
+        holder.acknowledgementButton.setOnClickListener(v -> {
+            if (isInternetConnected(myActivity)) {
+                new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme)
+                        .setMessage("Are you sure you have recieved this product")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            send_Feedback_API(
+                                    item.getOrderId(),
+                                    get_E_id(myActivity),
+                                    item.getGiftId(),
+                                    "ACKNOWLEDGEMENT",
+                                    ""
+                            );
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            } else {
+                Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
             }
         });
+
+        // ✅ Not Delivered click with alert
+        holder.btnNotDelivered.setOnClickListener(v -> {
+            if (isInternetConnected(myActivity)) {
+                new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme)
+                        .setMessage("Are you sure this product is not delivered to you?")
+                        .setPositiveButton("Yes", (dialog, which) -> {
+                            send_Feedback_API(
+                                    item.getOrderId(),
+                                    get_E_id(myActivity),
+                                    item.getGiftId(),
+                                    "ACKNOWLEDGEMENT",
+                                    "Not Delivered"
+                            );
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
+            } else {
+                Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Feedback / Complaint
+        holder.complaintButton.setOnClickListener(view -> order_help_dialog(item));
 
         return convertView;
     }
 
-    public void setFilter(ArrayList<CommonHelper> approved_list, String type) {
-        if (type.matches("fresh_a")) {
-            this.p_item_list.clear();
-        }
-        this.p_item_list.addAll(approved_list);
+    public void setFilter(ArrayList<OrderDataSet> approved_list, String type) {
+        notifyDataSetChanged();
     }
 
-    public class ViewHolder {
-        TextView tv_P_item, tv_P_details, tv_P_order_id, tv_order_del_date,
-                tv_json_row, tv_support, tv_gift_delivered, tv_p_TYPE, tv_p_Comments, tv_p_Status;
-        ImageView iv_gift_item;
+    public static class ViewHolder {
+        TextView textViewProductName, textViewProductCount, textViewOrderId, tvDate,
+                textViewDeliveryDate, textViewOrderStatus, trackingOrderId, tvRemarks;
+        ImageView imageViewProductImage;
+        Button acknowledgementButton, complaintButton, trackOrderButton, btnNotDelivered;
+        LinearLayout llTrackingId, llRemarks;
     }
 
-    String temp__ = "YES";
-
-    private void order_Delivered(final String order_id, final String is_order_received) {
+    @SuppressLint("InflateParams")
+    private void order_help_dialog(final OrderDataSet item) {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
-
-            // Get the layout inflater
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
             LayoutInflater inflater = myActivity.getLayoutInflater();
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
             issueBuilder.setView(inflater.inflate(R.layout.dialog_order_help, null));
-
             final Dialog dialog = issueBuilder.create();
-
             dialog.setCanceledOnTouchOutside(true);
             dialog.setCancelable(true);
-//			dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//			Window window = dialog.getWindow();
             dialog.show();
 
-            final EditText et_gift_comments = (EditText) dialog.findViewById(R.id.et_gift_comments);
-            et_gift_comments.setVisibility(View.GONE);
-            final RadioGroup rg_gift_help = (RadioGroup) dialog.findViewById(R.id.rg_gift_help);
+            final EditText et_gift_comments = dialog.findViewById(R.id.et_gift_comments);
+            TextView text = dialog.findViewById(R.id.tv_gift_help);
 
-            final RadioButton rb_0 = (RadioButton) dialog.findViewById(R.id.rb_0);
-            rb_0.setText("Yes");
+            et_gift_comments.setVisibility(View.VISIBLE);
 
-            final RadioButton rb_1 = (RadioButton) dialog.findViewById(R.id.rb_1);
-            rb_1.setText("No");
-            temp__ = "YES";
-            final RadioButton rb_2 = (RadioButton) dialog.findViewById(R.id.rb_2);
-            rb_2.setVisibility(View.GONE);
-            rg_gift_help.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    final int selectedId = radioGroup.getCheckedRadioButtonId();
-                    RadioButton radioSexButton = (RadioButton) dialog.findViewById(selectedId);
-                    temp__ = radioSexButton.getText().toString();
-                }
-            });
-            final TextView tv_a_title = (TextView) dialog.findViewById(R.id.tv_a_title);
-            tv_a_title.setText("Delivery Confirmation");
-            final TextView tv_gift_help = (TextView) dialog.findViewById(R.id.tv_gift_help);
-            tv_gift_help.setText("Save");
-            tv_gift_help.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (isInternetConnected(myActivity)) {
-                        ((MyOrdersActivity) myActivity).confirm_order_received(order_id, temp__.toUpperCase());
+            text.setOnClickListener(v -> {
+                if (isInternetConnected(myActivity)) {
+                    if (et_gift_comments.getText().toString().trim().isEmpty()) {
+                        Toast.makeText(myActivity, "Please write some feedback ", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
+                        send_Feedback_API(
+                                item.getOrderId(),
+                                get_E_id(myActivity),
+                                item.getGiftId(),
+                                "FEEDBACK",
+                                et_gift_comments.getText().toString()
+                        );
+                        dialog.dismiss();
                     }
+                } else {
+                    Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
                 }
             });
-        } catch (final Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void order_help_dialog(final String order_id) {
-        try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
-
-            // Get the layout inflater
-            LayoutInflater inflater = myActivity.getLayoutInflater();
-            // Inflate and set the layout for the dialog
-            // Pass null as the parent view because its going in the dialog layout
-            issueBuilder.setView(inflater.inflate(R.layout.dialog_order_help, null));
-
-            final Dialog dialog = issueBuilder.create();
-
-            dialog.setCanceledOnTouchOutside(true);
-            dialog.setCancelable(true);
-//			dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-//			Window window = dialog.getWindow();
-            dialog.show();
-
-            final EditText et_gift_comments = (EditText) dialog.findViewById(R.id.et_gift_comments);
-            final RadioGroup rg_gift_help = (RadioGroup) dialog.findViewById(R.id.rg_gift_help);
-
-            TextView text = (TextView) dialog.findViewById(R.id.tv_gift_help);
-            text.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (isInternetConnected(myActivity)) {
-                        int selectedId = rg_gift_help.getCheckedRadioButtonId();
-                        RadioButton radioSexButton = (RadioButton) dialog.findViewById(selectedId);
-                        continueGiftHelp(radioSexButton.getText().toString(), order_id, et_gift_comments.getText().toString().trim() + "");
-                    } else {
-                        Toast.makeText(myActivity, checkInternetConnection, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        } catch (final Exception e) {
-            e.printStackTrace();
+        } catch (final Exception ignored) {
         }
     }
 
@@ -261,7 +268,6 @@ public class MyOrderDeliveredAdapter extends BaseAdapter {
         params.put("support_type", support_type);
         params.put("comment", comment);
 
-        //the_engineer_id,order_id,support_type,comment
         final AsyncHttpClient client = new AsyncHttpClient();
         client.setTimeout(DEFAULT_TIMEOUT);
         client.post(ws_submit_support_with_respect_to_order, params, new AsyncHttpResponseHandler() {
@@ -270,14 +276,12 @@ public class MyOrderDeliveredAdapter extends BaseAdapter {
                 final String str = new String(responseBody);
                 try {
                     final JSONObject reader = new JSONObject(str);
-                    print_Log_d("submit_gift_help", str + "");
+                    print_Log_d("submit_gift_help", str);
                     Toast.makeText(myActivity, reader.optString("process_message"), Toast.LENGTH_SHORT).show();
                     if (reader.optString("process_status").equalsIgnoreCase("YES")) {
                         myActivity.finish();
                     }
-
-                } catch (final Exception e) {
-                    e.printStackTrace();
+                } catch (final Exception ignored) {
                 } finally {
                     dismissDialog();
                 }
@@ -287,12 +291,63 @@ public class MyOrderDeliveredAdapter extends BaseAdapter {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 dismissDialog();
             }
-
-
         });
     }
 
-    ProgressDialog progressDialogObj;
+    // ---------------------------- API CALL ----------------------------
+    public void send_Feedback_API(final String orderId, final String userId, final String giftId,
+                                  final String feedbackType, final String feedbackText) {
+        loadDialog();
+
+        final RequestParams params = new RequestParams();
+        params.put("order_id", orderId);
+        params.put("user_id", userId);
+        params.put("gift_id", giftId);
+        params.put("feedback_type", feedbackType);
+
+        if (feedbackText != null) {
+            params.put("feedback", feedbackText);
+        }
+
+        Log.d("params_", params.toString());
+
+        final AsyncHttpClient client = new AsyncHttpClient();
+        client.setTimeout(DEFAULT_TIMEOUT);
+
+        client.post(api_save_feedback, params, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                dismissDialog();
+                final String strResponse = new String(responseBody);
+                try {
+                    JSONObject reader = new JSONObject(strResponse);
+                    String msg = reader.optString("message", "Feedback submitted successfully");
+                    Toast.makeText(myActivity, msg, Toast.LENGTH_SHORT).show();
+
+                    if (myActivity instanceof MyOrdersActivity) {
+                        MyOrdersActivity.the_max_date_time_A = "";
+                        ((MyOrdersActivity) myActivity).page_no_A = 1;
+                        ((MyOrdersActivity) myActivity).get_Approve_List(1, "", "fresh_a");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(myActivity, "Response parse error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                dismissDialog();
+                Toast.makeText(myActivity, "Failed to submit feedback", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateList(ArrayList<OrderDataSet> newList) {
+        this.p_item_list.clear();
+        this.p_item_list.addAll(newList);
+        notifyDataSetChanged();
+    }
 
     public void loadDialog() {
         if (progressDialogObj != null && progressDialogObj.isShowing())
@@ -305,5 +360,46 @@ public class MyOrderDeliveredAdapter extends BaseAdapter {
     public void dismissDialog() {
         if (progressDialogObj != null && progressDialogObj.isShowing())
             progressDialogObj.dismiss();
+    }
+
+    // ----------------------------------------------------
+    // 🔹 Helper: build 3-line block on right side
+    //      Points - product_point_text
+    //      TDS    - tds_text
+    //      Total  - point_taken_text
+    // ----------------------------------------------------
+    private String buildPointsBlock(OrderDataSet item) {
+        String productPointText = safe(item.getProductPointText()); // value of product_point_text
+        String tdsText = safe(item.getTdsText());                   // value of tds_text
+        String totalPoint = safe(item.getTokenPoint());             // value of point_taken_text
+
+        StringBuilder sb = new StringBuilder();
+
+        if (!TextUtils.isEmpty(productPointText)) {
+            sb.append("Points - ").append(productPointText);
+        }
+
+        if (!TextUtils.isEmpty(tdsText)) {
+            if (sb.length() > 0) sb.append("\n");
+            sb.append("TDS - ").append(tdsText);
+        }
+
+        if (!TextUtils.isEmpty(totalPoint)) {
+            if (sb.length() > 0) sb.append("\n");
+            sb.append("Total - ").append(totalPoint);
+        }
+
+        if (sb.length() == 0) {
+            return "-";
+        }
+
+        return sb.toString();
+    }
+
+    private String safe(String value) {
+        if (value == null) return "";
+        value = value.trim();
+        if ("null".equalsIgnoreCase(value)) return "";
+        return value;
     }
 }

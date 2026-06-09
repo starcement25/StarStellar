@@ -1,146 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#F2F0F1">
+    android:background="#F2F0F1"
+    android:fitsSystemWindows="true">
+
     <LinearLayout
+        android:id="@+id/llTopView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/llTopView"
-        android:background="@color/colorHeaderView"
-        >
+        android:background="@color/colorHeaderView">
+
         <include
             android:id="@+id/headeView"
-            layout="@layout/common_header"
-            />
+            layout="@layout/common_header" />
     </LinearLayout>
     <!--    date selector-->
     <LinearLayout
-        android:layout_below="@+id/llTopView"
         android:id="@+id/ll_dt_sltr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#d3d3d3"
+        android:layout_below="@+id/llTopView"
         android:layout_gravity="center"
+        android:background="#d3d3d3"
         android:gravity="center"
-        >
+        android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:clickable="true"
+            android:gravity="center"
             android:onClick="show_calendar"
-            android:tag="start_date"
+            android:orientation="horizontal"
             android:paddingTop="9dp"
             android:paddingBottom="9dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            >
+            android:tag="start_date">
+
             <TextView
                 android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
 
                 android:layout_gravity="center"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="5dp"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="Start Date  "
                     android:textColor="@color/colorBlack"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textSize="10sp"
-                    />
+                    android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/tv_start_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:hint="00-00-0000"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:textSize="10sp"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="1"
             android:clickable="true"
+            android:gravity="center"
             android:onClick="show_calendar"
-            android:tag="end_date"
+            android:orientation="horizontal"
             android:paddingTop="9dp"
             android:paddingBottom="9dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            >
+            android:tag="end_date">
+
             <TextView
                 android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
 
                 android:layout_gravity="center"
-                android:visibility="invisible"
-                />
+                android:visibility="invisible" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginLeft="5dp"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="End Date  "
                     android:textColor="@color/colorBlack"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:textSize="10sp"
-                    />
+                    android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/tv_end_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:hint="00-00-0000"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:textSize="10sp"
-                    />
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_Pending"
-        android:layout_below="@id/ll_dt_sltr"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:dividerHeight="2dp"
-        android:divider="@color/colorWhite"
+        android:layout_below="@id/ll_dt_sltr"
         android:layout_marginLeft="@dimen/left_right_margin_3dp"
         android:layout_marginRight="@dimen/left_right_margin_3dp"
+        android:divider="@color/colorWhite"
+        android:dividerHeight="2dp"
         android:visibility="visible"
-        />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </RelativeLayout>

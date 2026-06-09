@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +38,7 @@ import static forcepower.com.star_stellar.Class.CommonClass.user_type;
 import static forcepower.com.star_stellar.Class.SharedPrefData.getDeviceWidth;
 import static forcepower.com.star_stellar.Class.SharedPrefData.get_Banner_Height;
 import static forcepower.com.star_stellar.Class.SharedPrefData.get_Header_Height;
+import static forcepower.com.star_stellar.Class.SharedPrefData.get_firebase_token;
 
 public class LoginStep1Activity extends BaseActivity {
     EditText et_L_mobile;
@@ -74,7 +76,7 @@ public class LoginStep1Activity extends BaseActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int item) {
                     if (items[item].toString().equalsIgnoreCase("TE")) {
-                        et_L_mobile.setText("9874450813");
+                        et_L_mobile.setText("9147768870");
                     } else if (items[item].toString().equalsIgnoreCase("Engg")) {
                         et_L_mobile.setText("9233974090");
                     }
@@ -114,6 +116,8 @@ public class LoginStep1Activity extends BaseActivity {
 
         final RequestParams params = new RequestParams();
         params.put("mobile", et_L_mobile.getText().toString());
+        params.put("firebase_token", get_firebase_token(myActivity));
+        Log.d("TAG", "login: "+get_firebase_token(myActivity));
 
         //mobile,user_type
          print_Log_d("_DOWNLOAD_U login", ws_generate_otp_for_engineer_and_te_login + "");

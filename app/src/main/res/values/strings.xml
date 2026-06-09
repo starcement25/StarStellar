@@ -33,5 +33,12 @@ Please review our Privacy Policy, which also governs your visit to this Site, to
     <string name="fb_login_protocol_scheme">fb1112450245618426</string>
     <string name="spl_charecter">0123456789 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.&amp;-_\n
     !@#$%^*()_+=-</string>
+    <string name="str_confirm_delivery">Confirm Delivery</string>
+    <string name="colored_text">
+		<![CDATA[
+		Lorem ipsum is a dummy or placeholder text commonly used in graphic design,
+		publishing, and web development. <a href="https://your-link.com" style="color:#E00000;">Read More</a>
+		]]>
+	</string>
 
 </resources>

@@ -118,7 +118,7 @@ public class CommonClass {
 
     public static void msg_Dialog(final Activity myActivity, final String msg, final boolean finishAble) {
         try {
-            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity);
+            final AlertDialog.Builder issueBuilder = new AlertDialog.Builder(myActivity,R.style.WhiteDialogTheme);
 
             final TextView tvCPopup = new TextView(myActivity);
             tvCPopup.setText(myActivity.getResources().getString(R.string.app_name));
