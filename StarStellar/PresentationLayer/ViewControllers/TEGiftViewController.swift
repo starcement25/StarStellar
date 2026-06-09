@@ -19,8 +19,10 @@ class TEGiftViewController: BaseViewController {
     var arrGifts = [JSON]()
     var strMyStellarPoints : String = ""
     
+    var intMyStellarPoints = 0
     var intGiftPageNo = 1
-    
+    var strCategoryName = ""
+    var strCategoryId = ""
     //MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -47,7 +49,7 @@ class TEGiftViewController: BaseViewController {
             
             var dict: [String : Any] = [:]
             dict["page_no"] = intGiftPageNo
-            
+             dict["category_id"] = strCategoryId
             SVProgressHUD.show()
             SSParserLayer.callGiftCatalogTE(dict, handler: { strStatus, strMessage, dictResponse in
                 SVProgressHUD.dismiss()

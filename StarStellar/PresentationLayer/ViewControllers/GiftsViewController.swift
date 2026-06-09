@@ -8,7 +8,7 @@
 
 import UIKit
 import SwiftyJSON
-import SVProgressHUD
+import SVProgressHUD 
 import Alamofire
 import SDWebImage
 
@@ -21,6 +21,7 @@ class GiftsViewController: BaseViewController, StellarPointsDelegate {
     var intMyStellarPoints = 0
     
     var intGiftPageNo = 1
+    var strCategoryId = "" 
     
     //MARK: - View Life Cycle
     
@@ -51,6 +52,7 @@ class GiftsViewController: BaseViewController, StellarPointsDelegate {
             var dict: [String : Any] = [:]
             dict["the_engineer_id"] = Defaults.engineerId()
             dict["page_no"] = intGiftPageNo
+            dict["category_id"] = strCategoryId
             
             SVProgressHUD.show()
             SSParserLayer.callShowMyGifts(dict, handler: { strStatus, strMessage, dictResponse in
@@ -65,8 +67,7 @@ class GiftsViewController: BaseViewController, StellarPointsDelegate {
                     //self.lblMyPoints.text = String(format: "My Stellar Points\n%@", self.strMyStellarPoints)
                     self.arrGifts += json["gift_data"].arrayValue
                     self.collViewGifts.reloadData()
-                    print(json)                    
-                    
+                    print(json)
                 }else{
                     self.showToastAlert(strMessage ?? StringConstant.kErrorMsg)
                 }

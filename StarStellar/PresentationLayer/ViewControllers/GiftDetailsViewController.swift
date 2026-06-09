@@ -17,6 +17,8 @@ protocol StellarPointsDelegate {
 }
 
 class GiftDetailsViewController: BaseTableViewController {
+    var strCategoryId   = ""
+    var strCategoryName = ""
     
     @IBOutlet weak var viewBase: UIView!
     @IBOutlet weak var imgViewGift: UIImageView!

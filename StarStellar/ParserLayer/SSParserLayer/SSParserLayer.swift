@@ -16,6 +16,9 @@ typealias blockDictWithMessage = (String?, String?, [AnyHashable : Any]?) -> Voi
 func APP_SERVICE(strService: String?) -> String? {
     return "\(StringConstant.Url.baseURL)\(strService ?? "")"
 }
+func APP_SERVICE_DEV(strService: String?) -> String? {
+    return "\(StringConstant.Url.devURL)\(strService ?? "")"
+}
 
 class SSParserLayer: NSObject {   
 
@@ -120,6 +123,15 @@ class SSParserLayer: NSObject {
     //Show My Gifts
     class func callShowMyGifts(_ dictParam: [AnyHashable : Any]?, handler completeHandler: @escaping blockDictWithMessage) {
         BaseJSONParser.baseService(withPostData: APP_SERVICE(strService: "ws_show_my_gift.php?"), withParam: dictParam, success: { dictParser in
+            completeHandler(dictParser?["process_status"] as? String, dictParser?["process_message"] as? String, dictParser)
+        }, failed: { strErrorMsg in
+            completeHandler("failed", strErrorMsg, nil)
+        })
+    }
+    
+    //Show My Gifts
+    class func callShowMyGiftsCategory(_ dictParam: [AnyHashable : Any]?, handler completeHandler: @escaping blockDictWithMessage) {
+        BaseJSONParser.baseService(withPostData: APP_SERVICE(strService: "category-list.php?"), withParam: dictParam, success: { dictParser in
             completeHandler(dictParser?["process_status"] as? String, dictParser?["process_message"] as? String, dictParser)
         }, failed: { strErrorMsg in
             completeHandler("failed", strErrorMsg, nil)

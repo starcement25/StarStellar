@@ -91,6 +91,7 @@
 		6341EB9828DB036A00B0BC72 /* TERecommSiteDetailsUpdateLifting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6341EB9728DB036A00B0BC72 /* TERecommSiteDetailsUpdateLifting.swift */; };
 		63F277D328E2FD13008D359C /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F277D128E2FD13008D359C /* splash.png */; };
 		63F277D428E2FD13008D359C /* splashx.png in Resources */ = {isa = PBXBuildFile; fileRef = 63F277D228E2FD13008D359C /* splashx.png */; };
+		8008CF112F739B83005C8842 /* GiftCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8008CF102F739B83005C8842 /* GiftCategoryViewController.swift */; };
 		8A48038D2E900A3E83073038 /* Pods_StarStellar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F09F6F78438E995B1E34A9B /* Pods_StarStellar.framework */; };
 		CA3CDA712BC6851B00C3D519 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = CA3CDA702BC6851B00C3D519 /* PrivacyInfo.xcprivacy */; };
 		CAB4904C2B43F0F8009FC74E /* MySiteRecommPendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB4904A2B43F0F8009FC74E /* MySiteRecommPendingCell.swift */; };
@@ -216,6 +217,7 @@
 		63F277D128E2FD13008D359C /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		63F277D228E2FD13008D359C /* splashx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splashx.png; sourceTree = "<group>"; };
 		6F09F6F78438E995B1E34A9B /* Pods_StarStellar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarStellar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8008CF102F739B83005C8842 /* GiftCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftCategoryViewController.swift; sourceTree = "<group>"; };
 		CA3CDA702BC6851B00C3D519 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		CAB4904A2B43F0F8009FC74E /* MySiteRecommPendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySiteRecommPendingCell.swift; sourceTree = "<group>"; };
 		CAB4904B2B43F0F8009FC74E /* MySiteRecommPendingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MySiteRecommPendingCell.xib; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 				185BF12F237EB0C2001CCA35 /* TEPendingEngineerVC.swift */,
 				6341EB9128DA3DDF00B0BC72 /* UpdateLiftingViewController.swift */,
 				6341EB9728DB036A00B0BC72 /* TERecommSiteDetailsUpdateLifting.swift */,
+				8008CF102F739B83005C8842 /* GiftCategoryViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -771,6 +774,7 @@
 				6341EB9228DA3DDF00B0BC72 /* UpdateLiftingViewController.swift in Sources */,
 				1861EAF122E0828500D3B6AD /* SSParserLayer.swift in Sources */,
 				184597AC230E887F0045BC3A /* EngineerProfileViewController.swift in Sources */,
+				8008CF112F739B83005C8842 /* GiftCategoryViewController.swift in Sources */,
 				184D51A922E99B54004C9FD8 /* EngineerSignUpSocialVC.swift in Sources */,
 				181F7343230A98080014FE74 /* TESiteRecommendationCell.swift in Sources */,
 				1861EAED22E080E900D3B6AD /* LogicConstant.swift in Sources */,
@@ -1018,7 +1022,7 @@
 				INFOPLIST_FILE = StarStellar/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Star Stellar 2.0";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1047,7 +1051,7 @@
 				INFOPLIST_FILE = StarStellar/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Star Stellar 2.0";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

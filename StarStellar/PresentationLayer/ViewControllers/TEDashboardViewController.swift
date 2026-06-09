@@ -181,9 +181,9 @@ class TEDashboardViewController: BaseViewController, UITableViewDelegate, UITabl
                 performSegue(withIdentifier: "dashboardToMyEngineers", sender: self)
                 print(strMenuItem)
             case "Gift Catalogue":
-                // giftCataloguePressed()
-                performSegue(withIdentifier: "dashboardToGiftCatalogue", sender: self)
-                print(strMenuItem)
+                giftCataloguePressed()
+                // performSegue(withIdentifier: "dashboardToGiftCatalogue", sender: self)
+                // print(strMenuItem)
             case "Update Lifting":
                 performSegue(withIdentifier: "teDashboardToUpdateLifting", sender: self)
                 print(strMenuItem)
@@ -192,23 +192,24 @@ class TEDashboardViewController: BaseViewController, UITableViewDelegate, UITabl
             }
         }
     }
-    
+
     var isChecked = false
     @objc func giftCataloguePressed() {
-        // Call API
-        guard let url = URL(string: "https://dev.starstellar.com/terms_api.php") else { return }        
+        SVProgressHUD.show()
+        guard let url = URL(string: "https://starstellar.com/terms_api.php") else { return }
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            SVProgressHUD.dismiss()
             guard error == nil, let data = data else {
-            print("API error:", error?.localizedDescription ?? "")
+                print("API error:", error?.localizedDescription ?? "")
                 return
-            }                
+            }
             do {
                 if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let content = json["content"] as? String,
-                   let link = json["link"] as? String {
-                        DispatchQueue.main.async {
-                           self.showPopup(message: content, link: link)
-                       }
+                let content = json["content"] as? String,
+                let link = json["link"] as? String {
+                    DispatchQueue.main.async {
+                        self.showPopup(message: content, link: link)
+                    }
                 }
             } catch {
                 print("JSON parse error:", error)
@@ -216,74 +217,164 @@ class TEDashboardViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         task.resume()
     }
-    
-    @objc func showPopup(message: String,link: String) {
-        // Semi-transparent background
+
+    @objc func showPopup(message: String, link: String) {
+        isChecked = false
+
+        // Background overlay
         let backgroundView = UIView(frame: self.view.bounds)
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         backgroundView.tag = 1001
         self.view.addSubview(backgroundView)
-        
+
         // Popup container
-        let popupView = UIView(frame: CGRect(x: 40, y: 0, width: self.view.frame.width - 80, height: 220))
-        popupView.center.y = self.view.center.y
+        let popupView = UIView()
         popupView.backgroundColor = .white
         popupView.layer.cornerRadius = 12
+        popupView.clipsToBounds = true
+        popupView.translatesAutoresizingMaskIntoConstraints = false
         backgroundView.addSubview(popupView)
-        
+
+        NSLayoutConstraint.activate([
+            popupView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 24),
+            popupView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -24),
+            popupView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            popupView.heightAnchor.constraint(lessThanOrEqualTo: backgroundView.heightAnchor, multiplier: 0.75)
+        ])
+
         // Title
-        let titleLabel = UILabel(frame: CGRect(x: 16, y: 16, width: popupView.frame.width - 32, height: 24))
+        let titleLabel = UILabel()
         titleLabel.text = "Terms & Conditions"
         titleLabel.font = .boldSystemFont(ofSize: 16)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         popupView.addSubview(titleLabel)
-        
-        // Message
-        let messageLabel = UILabel(frame: CGRect(x: 16, y: 50, width: popupView.frame.width - 32, height: 50))
-        messageLabel.text = message
-        messageLabel.numberOfLines = 0
-        messageLabel.font = .systemFont(ofSize: 12)
-        popupView.addSubview(messageLabel)
-        
-        // Checkbox button
+
+        // Separator
+        let separator = UIView()
+        separator.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        popupView.addSubview(separator)
+
+        // Scroll view for HTML content
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        popupView.addSubview(scrollView)
+
+        // HTML content label
+        let contentLabel = UILabel()
+        contentLabel.numberOfLines = 0
+        contentLabel.font = .systemFont(ofSize: 13)
+        contentLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        // ✅ Parse HTML content (handles <ul><li> tags)
+        if let htmlData = message.data(using: .utf8),
+        let attributed = try? NSAttributedString(
+            data: htmlData,
+            options: [
+                .documentType: NSAttributedString.DocumentType.html,
+                .characterEncoding: String.Encoding.utf8.rawValue
+            ],
+            documentAttributes: nil
+        ) {
+            contentLabel.attributedText = attributed
+        } else {
+            contentLabel.text = message
+        }
+
+        scrollView.addSubview(contentLabel)
+
+        // Checkbox row
         let checkboxButton = UIButton(type: .system)
-        checkboxButton.frame = CGRect(x: 16, y: 110, width: 24, height: 24)
         checkboxButton.setImage(UIImage(systemName: "square"), for: .normal)
         checkboxButton.tintColor = .black
-        popupView.addSubview(checkboxButton)
-        
-        // Checkbox label
-        let checkboxLabel = UILabel(frame: CGRect(x: 50, y: 110, width: popupView.frame.width - 66, height: 24))
-        let text = "I accept the terms"
-        let attributedString = NSMutableAttributedString(string: text)
-        let linkRange = (text as NSString).range(of: "terms")
-        attributedString.addAttribute(.foregroundColor, value: UIColor.systemBlue, range: linkRange)
-        attributedString.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: linkRange)
-        checkboxLabel.attributedText = attributedString
-        checkboxLabel.accessibilityHint = link
-        checkboxLabel.isUserInteractionEnabled = true
-        popupView.addSubview(checkboxLabel)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(openLink(_:)))
-        checkboxLabel.addGestureRecognizer(tap)
-        
-        // Toggle checkbox
-        
+        checkboxButton.translatesAutoresizingMaskIntoConstraints = false
         checkboxButton.addTarget(self, action: #selector(checkboxTapped(_:)), for: .touchUpInside)
-        
+        popupView.addSubview(checkboxButton)
+
+        let checkboxLabel = UILabel()
+        checkboxLabel.text = "I accept the terms & conditions"
+        checkboxLabel.font = .systemFont(ofSize: 13)
+        checkboxLabel.numberOfLines = 0
+        checkboxLabel.translatesAutoresizingMaskIntoConstraints = false
+        popupView.addSubview(checkboxLabel)
+
+        // View full terms link
+        let linkButton = UIButton(type: .system)
+        linkButton.setTitle("View full terms", for: .normal)
+        linkButton.titleLabel?.font = .systemFont(ofSize: 12)
+        linkButton.accessibilityHint = link
+        linkButton.translatesAutoresizingMaskIntoConstraints = false
+        linkButton.addTarget(self, action: #selector(openTermsLink(_:)), for: .touchUpInside)
+        popupView.addSubview(linkButton)
+
         // Submit button
         let submitButton = UIButton(type: .system)
-        submitButton.frame = CGRect(x: 16, y: 150, width: popupView.frame.width - 32, height: 44)
         submitButton.setTitle("Submit", for: .normal)
         submitButton.backgroundColor = .systemBlue
         submitButton.setTitleColor(.white, for: .normal)
         submitButton.layer.cornerRadius = 8
-        popupView.addSubview(submitButton)
-        
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
         submitButton.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
-        
+        popupView.addSubview(submitButton)
+
+        // Layout constraints
+        NSLayoutConstraint.activate([
+            // Title
+            titleLabel.topAnchor.constraint(equalTo: popupView.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -16),
+
+            // Separator
+            separator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            separator.leadingAnchor.constraint(equalTo: popupView.leadingAnchor),
+            separator.trailingAnchor.constraint(equalTo: popupView.trailingAnchor),
+            separator.heightAnchor.constraint(equalToConstant: 0.5),
+
+            // Scroll view
+            scrollView.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 8),
+            scrollView.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 16),
+            scrollView.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -16),
+            scrollView.heightAnchor.constraint(equalToConstant: 180),
+
+            // Content label inside scroll view
+            contentLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentLabel.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentLabel.widthAnchor.constraint(equalTo: scrollView.widthAnchor), // ✅ forces vertical scroll only
+
+            // Checkbox
+            checkboxButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 12),
+            checkboxButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 16),
+            checkboxButton.widthAnchor.constraint(equalToConstant: 24),
+            checkboxButton.heightAnchor.constraint(equalToConstant: 24),
+
+            checkboxLabel.centerYAnchor.constraint(equalTo: checkboxButton.centerYAnchor),
+            checkboxLabel.leadingAnchor.constraint(equalTo: checkboxButton.trailingAnchor, constant: 8),
+            checkboxLabel.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -16),
+
+            // View full terms link
+            linkButton.topAnchor.constraint(equalTo: checkboxButton.bottomAnchor, constant: 4),
+            linkButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 14),
+
+            // Submit button
+            submitButton.topAnchor.constraint(equalTo: linkButton.bottomAnchor, constant: 8),
+            submitButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 16),
+            submitButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -16),
+            submitButton.heightAnchor.constraint(equalToConstant: 44),
+            submitButton.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -16),
+        ])
+
         // Tap outside to dismiss
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissPopup(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func openTermsLink(_ sender: UIButton) {
+        guard let urlString = sender.accessibilityHint,
+            let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
     }
     
     @objc func openLink(_ sender: UITapGestureRecognizer) {
