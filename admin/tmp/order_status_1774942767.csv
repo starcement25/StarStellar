@@ -1,0 +1,12 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003398,4,Test Remarks,,,
+SS00003430,4,Product is out of stock,,,
+SS00003424,4,Product is out of stock,,,
+SS00003419,4,Product is out of stock,,,
+SS00003416,4,Product is out of stock,,,
+SS00003445,4,Product is out of stock,,,
+SS00003435,4,Product is out of stock,,,
+SS00003434,4,Product is out of stock,,,
+SS00003340,4,Product is out of stock,,,
+SS00003403,4,Product is out of stock,,,
+SS00003399,4,Product is out of stock,,,

@@ -1,0 +1,42 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+3162,2,,,,28-12-2025
+3161,2,,,,28-12-2025
+3147,2,,,,30-12-2025
+3128,2,,,,29-12-2025
+3125,2,,,,28-12-2025
+3006,2,,,,01-01-2026
+3001,2,,,,07-01-2026
+2976,2,,,,24-12-2025
+2970,2,,,,03-01-2026
+2938,2,,,,28-12-2025
+3180,1,,www.amazon.in,1,27-01-2026
+3174,1,,www.amazon.in,1,27-01-2026
+3172,1,,www.amazon.in,1,27-01-2026
+3171,1,,www.amazon.in,1,27-01-2026
+3168,1,,www.amazon.in,1,27-01-2026
+3167,1,,www.amazon.in,1,27-01-2026
+3166,1,,www.amazon.in,1,27-01-2026
+3165,1,,www.amazon.in,1,27-01-2026
+3164,1,,www.amazon.in,1,27-01-2026
+3160,1,,www.amazon.in,1,27-01-2026
+3159,1,,www.amazon.in,1,27-01-2026
+3130,1,,www.amazon.in,1,27-01-2026
+3110,1,,www.amazon.in,1,27-01-2026
+3064,1,,www.amazon.in,1,27-01-2026
+3010,1,,www.amazon.in,1,27-01-2026
+3009,1,,www.amazon.in,1,27-01-2026
+2981,1,,www.amazon.in,1,27-01-2026
+2973,1,,www.amazon.in,1,27-01-2026
+2965,1,,www.amazon.in,1,27-01-2026
+2962,1,,www.amazon.in,1,27-01-2026
+2954,1,,www.amazon.in,1,27-01-2026
+2953,1,,www.amazon.in,1,27-01-2026
+2945,1,,www.amazon.in,1,27-01-2026
+2944,1,,www.amazon.in,1,27-01-2026
+2935,1,,www.amazon.in,1,27-01-2026
+2912,1,,www.amazon.in,1,27-01-2026
+2887,1,,www.amazon.in,1,27-01-2026
+2894,1,,www.amazon.in,1,27-01-2026
+3112,3,Not under service area,,,
+2921,3,Not under service area,,,
+2882,3,Not under service area,,,

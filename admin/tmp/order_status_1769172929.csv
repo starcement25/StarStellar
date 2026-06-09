@@ -1,0 +1,42 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003162,2,,,,28-12-2025
+SS00003161,2,,,,28-12-2025
+SS00003147,2,,,,30-12-2025
+SS00003128,2,,,,29-12-2025
+SS00003125,2,,,,28-12-2025
+SS00003006,2,,,,01-01-2026
+SS00003001,2,,,,07-01-2026
+SS00002976,2,,,,24-12-2025
+SS00002970,2,,,,03-01-2026
+SS00002938,2,,,,28-12-2025
+SS00003180,1,,www.amazon.in,1,27-01-2026
+SS00003174,1,,www.amazon.in,1,27-01-2026
+SS00003172,1,,www.amazon.in,1,27-01-2026
+SS00003171,1,,www.amazon.in,1,27-01-2026
+SS00003168,1,,www.amazon.in,1,27-01-2026
+SS00003167,1,,www.amazon.in,1,27-01-2026
+SS00003166,1,,www.amazon.in,1,27-01-2026
+SS00003165,1,,www.amazon.in,1,27-01-2026
+SS00003164,1,,www.amazon.in,1,27-01-2026
+SS00003160,1,,www.amazon.in,1,27-01-2026
+SS00003159,1,,www.amazon.in,1,27-01-2026
+SS00003130,1,,www.amazon.in,1,27-01-2026
+SS00003110,1,,www.amazon.in,1,27-01-2026
+SS00003064,1,,www.amazon.in,1,27-01-2026
+SS00003010,1,,www.amazon.in,1,27-01-2026
+SS00003009,1,,www.amazon.in,1,27-01-2026
+SS00002981,1,,www.amazon.in,1,27-01-2026
+SS00002973,1,,www.amazon.in,1,27-01-2026
+SS00002965,1,,www.amazon.in,1,27-01-2026
+SS00002962,1,,www.amazon.in,1,27-01-2026
+SS00002954,1,,www.amazon.in,1,27-01-2026
+SS00002953,1,,www.amazon.in,1,27-01-2026
+SS00002945,1,,www.amazon.in,1,27-01-2026
+SS00002944,1,,www.amazon.in,1,27-01-2026
+SS00002935,1,,www.amazon.in,1,27-01-2026
+SS00002912,1,,www.amazon.in,1,27-01-2026
+SS00002887,1,,www.amazon.in,1,27-01-2026
+SS00002894,1,,www.amazon.in,1,27-01-2026
+SS00003112,3,Not under service area,,,
+SS00002921,3,Not under service area,,,
+SS00002882,3,Not under service area,,,

@@ -1,0 +1,200 @@
+<?php
+set_time_limit(0);
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+date_default_timezone_set('Asia/Kolkata');
+include "star_connection.php";
+include 'admin/APNSBase.php';
+include 'admin/APNotification.php';
+include 'admin/APFeedback.php';
+
+function send_push_notification_in_android($registration_ids, $message) {
+    $apikey = "AAAAFS9z2u8:APA91bEy8andvCzKLsvpKm5SNvJmdOgkICMh3lLcVXDrPyNYXy84AUZdV5xfilvrrI8QbTub69I3Qub6mDZmXLNana0CnqaF8Y2hSxlg5Eaa6uK5ehiTLzyYGyJbkOsS1PYGSLzJp-OF";
+
+    $url = 'https://fcm.googleapis.com/fcm/send';
+    $headers = array(
+        'Authorization: key=' . $apikey,
+        'Content-Type: application/json'
+    );
+    $fields = array(
+        'to' => $registration_ids,
+        'data' => $message
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+    $result = curl_exec($ch);
+
+    if ($result === FALSE) {
+        $result = '{"success":0,"failure":1}';
+    }
+
+    curl_close($ch);
+    $result_str = json_decode($result, true);
+    if ($result_str["success"] == 1) {
+        return "TRUE";
+    } else {
+        return "FALSE";
+    }
+}
+
+function pushNotificationInIOS_custom_development($deviceToken, $noty_title, $noty_message, $noty_image) {
+    $today_date = date("Y_m_d");
+    $notification2 = new APNotification('development');
+    $notification2->setDeviceToken($deviceToken);
+    $notification2->setTitle($noty_title);
+    $notification2->setBadge(1);
+    $notification2->setMessage($noty_message);
+    if ($noty_image != "") {
+        $notification2->setImageUrl($noty_image);
+    }
+    $notification2->setSound("default");
+    $notification2->setPrivateKey('admin/starstellar_dev.pem');
+    $notification2->setPrivateKeyPassphrase('C0rali0s');
+    $res = $notification2->send();
+    $notification2 = NULL;
+    if ($res) {
+        return "TRUE";
+    } else {
+        return "FALSE";
+    }
+}
+
+function pushNotificationInIOS_custom_production($deviceToken, $noty_title, $noty_message, $noty_image) {
+    $today_date = date("Y_m_d");
+    $notification2 = new APNotification('production');
+    $notification2->setDeviceToken($deviceToken);
+    $notification2->setTitle($noty_title);
+    $notification2->setBadge(1);
+    $notification2->setMessage($noty_message);
+    if ($noty_image != "") {
+        $notification2->setImageUrl($noty_image);
+    }
+    $notification2->setSound("default");
+    $notification2->setPrivateKey('admin/starstellar_dis.pem');
+    $notification2->setPrivateKeyPassphrase('C0rali0s');
+    $res = $notification2->send();
+    $notification2 = NULL;
+    if ($res) {
+        return "TRUE";
+    } else {
+        return "FALSE";
+    }
+}
+
+$te_master = "te_master";
+$engineer_master = "engineer_master";
+$setting_master = "setting_master";
+$ledger_master = "ledger_master";
+$curr_date_time = date("Y-m-d H:i:s");
+
+// Validate input parameters
+$te_code = isset($_POST["te_code"]) ? trim($_POST["te_code"]) : "";
+
+error_log("te_code: $te_code");
+
+if (!empty($te_code)) {
+    $te_code = trim($_POST["te_code"]);
+    // Fetch signup_point from the setting_master
+    $sqlckrds = "SELECT `the_value` FROM $setting_master WHERE `the_key_name`='signup_point'";
+    $resckrds = mysqli_query($conn, $sqlckrds);
+
+    if (!$resckrds) {
+        $error_message = mysqli_error($conn);
+        $res_data = array("process_status" => "NO", "process_message" => "Error fetching signup_point: $error_message");
+        echo json_encode($res_data);
+        mysqli_close($conn);
+        exit;
+    }
+
+    $rowckrds = mysqli_fetch_assoc($resckrds);
+    $signup_point = isset($rowckrds["the_value"]) ? trim($rowckrds["the_value"]) : 0;
+
+    if ($signup_point == "") {
+        $signup_point = 0;
+    }
+
+    // Fetch engineer details
+    // $sql2 = "SELECT `e_points`,`status_by_te`,`registration_id`,`device_type` FROM $engineer_master WHERE `te_code`='$te_code'";
+    $sql2 = "SELECT `e_points`, `status_by_te`, `registration_id`, `device_type` FROM $engineer_master WHERE `te_code`='$te_code' OR `status_by_te`='PENDING' OR `status_by_te`='APPROVED'";
+    error_log("SQL: $sql2");
+    $res2 = mysqli_query($conn, $sql2);
+
+    if (!$res2) {
+        $error_message = mysqli_error($conn);
+        $res_data = array("process_status" => "NO", "process_message" => "Error fetching engineer details: $error_message");
+        echo json_encode($res_data);
+        mysqli_close($conn);
+        exit;
+    }
+
+    $tot_res2 = mysqli_num_rows($res2);
+    error_log("Total Rows: $tot_res2");
+    if ($tot_res2 > 0) {
+        $row2 = mysqli_fetch_assoc($res2);
+        $e_points = $row2["e_points"];
+
+        if ($e_points == "") {
+            $e_points = 0;
+        }
+
+        $e_points = intval($e_points);
+        $status_by_te = $row2["status_by_te"];
+        $device_type = $row2["device_type"] ? trim($row2["device_type"]) : "";
+        $registration_id = $row2["registration_id"] ? trim($row2["registration_id"]) : "";
+
+        if ($status_by_te == "PENDING") {
+            $actual_eng_point = ($e_points + $signup_point);
+
+            $sql26 = "UPDATE $engineer_master SET `status_by_te`='APPROVED',`e_points`='$actual_eng_point' WHERE `te_code`='$te_code'";
+            $res26 = mysqli_query($conn, $sql26);
+
+            $sqlldgrin = "INSERT INTO $ledger_master (`user_id`,`description`,`point_earned`,`ldgr_datetime`) VALUES ('$te_code','Sign up','$signup_point','$curr_date_time')";
+            $resldgrin = mysqli_query($conn, $sqlldgrin);
+
+            if ($registration_id != "") {
+                $curr_timestamp = date('Y-m-d H:i:s');
+                $curr_date_time = date("Y-m-d H:i:s");
+                $the_title = "Star Stellar";
+                $the_message = "Congrats! You have got signup point.";
+                $payload = array();
+                $payload['team'] = 'India';
+                $payload['score'] = '5.6';
+                $app_noty_image = "";
+                $android_message['data'] = array("title" => $the_title, "is_background" => FALSE, "message" => $the_message, "image" => $app_noty_image, "payload" => $payload, "timestamp" => $curr_timestamp);
+                $body['aps'] = array("alert" => array('body' => $the_message), "sound" => "default");
+
+                if ($device_type == "IOS") {
+                    $sent_sts_prod = pushNotificationInIOS_custom_production($registration_id, $the_title, $the_message, $app_noty_image);
+                    $sent_sts_dev = pushNotificationInIOS_custom_development($registration_id, $the_title, $the_message, $app_noty_image);
+
+                } else if ($device_type == "ANDROID") {
+                    $sent_sts = send_push_notification_in_android($registration_id, $android_message);
+
+                }
+
+                $res_data = array("process_status" => "YES", "process_message" => "Successfully approved.");
+            } else {
+                $res_data = array("process_status" => "NO", "process_message" => "Invalid registration_id.");
+            }
+        } else if ($status_by_te == "APPROVED") {
+            $res_data = array("process_status" => "YES", "process_message" => "The engineer details already approved.");
+        } else if ($status_by_te == "REJECTED") {
+            $res_data = array("process_status" => "YES", "process_message" => "The engineer details already rejected.");
+        } else {
+            $res_data = array("process_status" => "NO", "process_message" => "Something went wrong.");
+        }
+    } else {
+        $res_data = array("process_status" => "NO", "process_message" => "No record found for te_code.");
+    }
+} else {
+    $res_data = array("process_status" => "NO", "process_message" => "Invalid parameters.");
+}
+
+echo json_encode($res_data);
+mysqli_close($conn);
+?>

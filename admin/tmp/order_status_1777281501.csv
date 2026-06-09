@@ -1,0 +1,35 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003456,1,,https://www.dtdc.com,D1008584231,23-04-2026
+SS00003452,1,,https://www.delhvery.com,4344110006952,17-04-2026
+SS00003451,1,,https://www.delhvery.com,4344010009214,18-04-2026
+SS00003449,1,,https://www.dtdc.com,X1004683338,17-04-2026
+SS00003448,1,,https://www.dtdc.com,D1008584121,21-04-2026
+SS00003444,1,,https://www.delhivery.com,4344010009520,23-04-2026
+SS00003443,1,,https://www.xpress bees.com,151177022088692,17-04-2026
+SS00003441,1,,https://www.blue dart.com,21021406615,24-04-2026
+SS00003440,1,,https://www.dtdc.com,X1004683403,21-04-2026
+SS00003437,1,,https://www.dtdc.com,D1002264536,24-04-2026
+SS00003432,1,,https://www.dtdc.com,D1008584101,17-04-2026
+SS00003431,1,,https://www.dtdc.com,D1008584118,21-04-2026
+SS00003428,1,,https://www.dtdc.com,D1008584066,17-04-2026
+SS00003426,1,,https://www.dtdc.com,D1002264373,17-04-2026
+SS00003423,1,,https://www.dtdc.com,X1004683398,21-04-2026
+SS00003422,1,,https://www.dtdc.com,X1004683399,21-04-2026
+SS00003421,1,,https://www.dtdc.com,X1004683400,21-04-2026
+SS00003420,1,,https://www.dtdc.com,X1004683401,21-04-2026
+SS00003415,1,,https://www.dtdc.com,D1008584069,17-04-2026
+SS00003412,1,,https://www.dtdc.com,D1008584250,23-04-2026
+SS00003411,1,,https://www.dtdc.com,X1004683369,18-04-2026
+SS00003410,1,,https://www.dtdc.com,D1002264374,17-04-2026
+SS00003406,1,,https://www.dtdc.com,D1002264497,23-04-2026
+SS00003405,1,,https://www.dtdc.com,D1002264514,24-04-2026
+SS00003404,1,,https://www.dtdc.com,D1008584030,17-04-2026
+SS00003402,1,,https://www.dtdc.com,D1002264507,23-04-2026
+SS00003400,1,,https://www.dtdc.com,D1002264485,21-04-2026
+SS00003397,1,,https://www.dtdc.com,D1002264486,21-04-2026
+SS00003396,1,,https://www.dtdc.com,D1008584113,21-04-2026
+SS00003393,1,,https://www.blue dart.com,21020255060,22-04-2026
+SS00003391,1,,https://www.dtdc.com,X1004683385,21-04-2026
+SS00003381,1,,https://www.dtdc.com,D1008584023,17-04-2026
+SS00003380,1,,https://www.dtdc.com,D1008584024,17-04-2026
+SS00003374,1,,https://www.dtdc.com,X1004683392,21-04-2026

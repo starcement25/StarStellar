@@ -1,0 +1,12 @@
+<?php
+session_start();
+if(isset($_SESSION["start_stellar_admin"])){
+unset($_SESSION["start_stellar_admin"]);
+unset($_SESSION["start_stellar_admin_name"]);
+unset($_SESSION["start_stellar_user_type"]);
+unset($_SESSION["start_stellar_data_show_type"]);
+header("location:index.php");
+}else{
+header("location:index.php");
+}
+?>

@@ -1,0 +1,23 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003501,1,,https://www.bluedart.com,21024944592,04-05-2026
+SS00003500,1,,https://www.delhivery.com,4344110007184,04-05-2026
+SS00003497,1,,https://www.dtdc.com,D1008584423,04-05-2026
+SS00003495,1,,https://www.dtdc.com,D1008584318,18-04-2026
+SS00003492,1,,https://www.dtdc.com,X1004683443,18-04-2026
+SS00003486,1,,https://www.delhivery.com,4344110007114,18-04-2026
+SS00003484,1,,https://www.dtdc.com,D1008584378,18-04-2026
+SS00003481,1,,https://www.dtdc.com,D1002264551,18-04-2026
+SS00003480,1,,https://www.bluedart.com,21024944393,18-04-2026
+SS00003469,1,,https://www.bluedart.com,21024944404,18-04-2026
+SS00003468,1,,https://www.dtdc.com,X1004683453,18-04-2026
+SS00003467,1,,https://www.dtdc.com,X1004683442,18-04-2026
+SS00003461,1,,https://www.delhivery.com,4344110007070,18-04-2026
+SS00003459,1,,https://www.dtdc.com,D1008584406,18-04-2026
+SS00003455,1,,https://www.xpressbees.com,151177022088640,18-04-2026
+SS00003453,1,,https://www.xpressbees.com,151177022088593,18-04-2026
+SS00003447,1,,https://www.dtdc.com,D1008584390,18-04-2026
+SS00003442,1,,https://www.xpressbees.com,151177022088639,18-04-2026
+SS00003413,1,,https://www.delhivery.com,4344010009995,17-04-2026
+SS00003407,1,,https://www.dtdc.com,X1004683445,17-04-2026
+SS00003394,1,,https://www.dtdc.com,D1008584315,23-04-2026
+SS00003390,1,,https://www.dtdc.com,D1008584386,23-04-2026

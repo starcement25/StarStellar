@@ -1,0 +1,14 @@
+.btn-success {background-color: #569c3c;
+              border-color: #569c3c;
+			  }
+			  
+.img-responsive { margin:0 auto;}
+
+.line { border:1px solid #999; margin-top:2px; margin-bottom:2px !important;}
+.line2 { border:1px solid #CCC; margin-top:2px; margin-bottom:2px !important;}
+
+.logo_middle { margin-top:8%;}
+
+.panel-body { margin-top:-15px;}
+
+.btn-block { margin-bottom:10px;}

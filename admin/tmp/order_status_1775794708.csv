@@ -1,0 +1,4 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003385,1,,www.bluedart.in,D1008583839,
+SS00003372,1,,www.bluedart.in,D1002264342,
+SS00003409,1,,www.bluedart.in,151177022088719,

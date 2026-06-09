@@ -1,0 +1,144 @@
+<?php
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED);
+date_default_timezone_set("Asia/Kolkata");
+$servername = "192.200.20.154";
+$username = "root";
+$password = "cmsZKAhWjC93gK5h";
+$db_name = "starsaat_STELLAR";
+
+$conn = mysqli_connect($servername, $username, $password,$db_name);
+
+if (mysqli_connect_errno()){
+die("Failed to connect to MySQL: " . mysqli_connect_error());
+}
+mysqli_set_charset($conn,"UTF8");
+
+$server_url = "https://" . $_SERVER['SERVER_NAME']."/";
+$home_url = $server_url;
+
+function get_value_by_setting_key($conn,$keyname){
+$keyvalue = "";
+$setting_master = "setting_master";
+if($keyname!=""){
+$sql_gapc = "select `the_value` from $setting_master where `the_key_name`='$keyname'";
+$res_gapc = mysqli_query($conn,$sql_gapc);
+$totres_gapc = mysqli_num_rows($res_gapc);
+if($totres_gapc>0){
+$row_gapc=mysqli_fetch_assoc($res_gapc);
+$keyvalue = trim($row_gapc["the_value"]);
+}
+}
+return $keyvalue; 
+}
+
+function get_te_branchcode_by_tecode($conn,$tecode){
+$te_branchcode = "";
+$te_master = "te_master";
+if($tecode!=""){
+$sql_gapc = "select `branch_code` from $te_master where `te_code`='$tecode'";
+$res_gapc = mysqli_query($conn,$sql_gapc);
+$totres_gapc = mysqli_num_rows($res_gapc);
+if($totres_gapc>0){
+$row_gapc=mysqli_fetch_assoc($res_gapc);
+$te_branchcode = trim($row_gapc["branch_code"]);
+}
+}
+return $te_branchcode; 
+}
+
+function get_asm_data_by_id($conn,$aid){
+$asm_master = "asm_master";
+$asm_data = array("sts"=>"NO","asm_name"=>"","ph_no"=>"","email"=>"","branch_code"=>"","branch"=>"");
+$aid = $aid ? trim($aid) : "";
+if($aid!=""){
+	$sql2p = "select * from $asm_master where `asm_id`='$aid'";
+	$res2p = mysqli_query($conn,$sql2p);
+	$tot_res2p = mysqli_num_rows($res2p);
+	if($tot_res2p>0){
+		$row2p = mysqli_fetch_assoc($res2p);
+		$asm_name = trim($row2p["asm_name"]);
+		$ph_no = trim($row2p["ph_no"]);
+		$email = trim($row2p["email"]);
+		$branch_code = trim($row2p["branch_code"]);
+		$branch = trim($row2p["branch"]);
+		
+		$asm_data = array("sts"=>"YES","asm_name"=>$asm_name,"ph_no"=>$ph_no,"email"=>$email,"branch_code"=>$branch_code,"branch"=>$branch);
+	}
+}
+
+return $asm_data;
+}
+
+function show_product_data_by_id($conn,$pid){
+$product_master = "product_master";
+$prod_data = array("prod_name"=>"","point_per_bag"=>0);
+$pid = $pid ? trim($pid) : "";
+if($pid!=""){
+	$sql2p = "select `prod_name`,`point_per_bag` from $product_master where `prod_id`='$pid'";
+	$res2p = mysqli_query($conn,$sql2p);
+	$tot_res2p = mysqli_num_rows($res2p);
+	if($tot_res2p>0){
+		$row2p = mysqli_fetch_assoc($res2p);
+		$pname = addslashes(trim($row2p["prod_name"]));
+		$pper_bag = $row2p["point_per_bag"] ? addslashes(trim($row2p["point_per_bag"])) : 0;
+		if($pper_bag==""){
+		$pper_bag = 0;	
+		}
+		$prod_data = array("prod_name"=>$pname,"point_per_bag"=>$pper_bag);
+	}
+}
+
+return $prod_data;
+}
+
+function send_the_mail($to_email,$subject,$bodyml){
+error_reporting(E_STRICT);
+set_time_limit(0);
+date_default_timezone_set("Asia/Kolkata");
+require_once('class.phpmailer.php');
+require_once('class.smtp.php');
+$sts = "FALSE";
+$to_email_arr = array();
+$to_email = $to_email ? trim($to_email) : "";
+$subject = $subject ? trim($subject) : "";
+$bodyml = $bodyml ? trim($bodyml) : "";
+if($to_email!="" && $subject!="" && $bodyml!=""){
+$to_email_arr = explode(",",$to_email);
+if(count($to_email_arr)>0){
+$mail             = new PHPMailer();
+$bodyml             = $bodyml;
+//$bodyml             = eregi_replace("[\]",'',$bodyml);
+$mail->IsSMTP(); // telling the class to use SMTP
+$mail->Host       = "mail.starcement.co.in"; // SMTP server (For gmail "mail.coral.in")
+$mail->SMTPDebug  = "";                     // enables SMTP debug information (for testing)
+                                           // 1 = errors and messages
+                                           // 2 = messages only
+$mail->SMTPAuth   = true;                  // enable SMTP authentication
+//$mail->SMTPSecure = "ssl";                 // sets the prefix to the servier
+//$mail->Host       = "103.87.174.95";      // sets GMAIL as the SMTP server (For gmail "mail.coral.in")
+$mail->Host       = "96.45.76.75";       // sets GMAIL as the SMTP server (For gmail "mail.coral.in")
+$mail->Port       = 587;                   // set the SMTP port for the GMAIL server (For gmail 465 )
+$mail->Username   = "starstellar-starcement";
+$mail->Password   = "nsu23hca28";
+$mail->SetFrom('starstellar@starcement.co.in', 'Starstellar');
+$mail->Subject    = $subject;
+$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+$mail->MsgHTML($bodyml);
+foreach($to_email_arr as $to_email_arr_val){
+	if(trim($to_email_arr_val)!=""){
+	if (filter_var(trim($to_email_arr_val), FILTER_VALIDATE_EMAIL)) {
+		$mail->AddAddress(trim($to_email_arr_val), $to_email_arr_val);
+	}
+	}
+}
+$mlsts = $mail->Send();
+if(!$mlsts) {
+  $sts = "FALSE";
+} else {
+ $sts = "TRUE";
+}
+}
+}
+return $sts;
+}
+?>

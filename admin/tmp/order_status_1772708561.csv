@@ -1,0 +1,7 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003204,4,Increase in price,,,
+SS00003152,4,Increase in price,,,
+SS00003148,4,Increase in price,,,
+SS00002996,4,Increase in price,,,
+SS00002993,4,Increase in price,,,
+SS00002985,4,Increase in price,,,

@@ -1,0 +1,11 @@
+# Archives
+*.zip
+*.tar.gz
+*.tgz
+
+# Database dumps
+*.sql
+/approved_recomend_site_pic
+/recomend_site_pic
+
+

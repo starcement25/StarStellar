@@ -1,0 +1,3 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00002955,4,Cancel instruction given by Suranjan sir on mail on 24th Feb,,,
+SS00003330,4,Test order placed,,,

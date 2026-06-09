@@ -1,0 +1,14 @@
+order_id,"status (1=ORDER PLACED, 2 = DELIVERED, 3= UNDELIVERED, 4= REJECT)",remarks(not mandatory),order_tracking_url,tracking_ord_id,delivery_date
+SS00003332,1,,starcement@starcement.co.in,5300026185,03-03-2026
+SS00003336,1,,starcement@starcement.co.in,5300026183,03-03-2026
+SS00003335,1,,starcement@starcement.co.in,5300026183,03-03-2026
+SS00003334,1,,starcement@starcement.co.in,5300026184,03-03-2026
+SS00003333,1,,starcement@starcement.co.in,5300026184,03-03-2026
+SS00003339,1,,starcement@starcement.co.in,5300026185,03-03-2026
+SS00003338,1,,starcement@starcement.co.in,5300026184,03-03-2026
+SS00003337,1,,starcement@starcement.co.in,5300026185,03-03-2026
+SS00003340,1,,starcement@starcement.co.in,5300026185,03-03-2026
+SS00003343,1,,starcement@starcement.co.in,5300026184,03-03-2026
+SS00003342,1,,starcement@starcement.co.in,5300026184,03-03-2026
+SS00003341,1,,starcement@starcement.co.in,5300026184,03-03-2026
+SS00003344,1,,starcement@starcement.co.in,5300026183,03-03-2026
